@@ -1,0 +1,52 @@
+Vamos a crear 
+
+Debe seguir exactamente la estructura base estándar de mis sections del proyecto de terrazas / invitados:
+
+Props base obligatorias:
+
+id, scheme, title, subtitle, fluid, align, boxed, order
+
+
+donde:
+
+fluid → controla si usa container o container-fluid px-3 px-md-5
+
+align → alinea solo el encabezado (left | center | right)
+
+boxed → controla el padding interno (true agrega p-4 p-md-5, false usa p-0 ps-lg-5 pe-lg-4 py-5)
+
+order="inverted" → invierte columnas (usa flex-row-reverse)
+
+scheme → aplica la clase component-scheme-{scheme} para los tokens visuales
+
+cols → Solo cuando haya mas de 2 columnas y no sea un carrousel, ademas solo cuando es destok podremos elegir cuantas mostrar
+
+animate → activa o desactiva las animaciones 
+
+El encabezado (title, subtitle) debe estar dentro de un <div :class="[fluid ? 'container-fluid px-3 px-md-5' : 'container']">, con alineación dinámica usando:
+
+:class="headerAlignClass"
+
+
+y los textos centrados mediante mx-auto o ms-auto me-0 según corresponda.
+
+Todo el contenido principal (cards, galerías, sliders, etc.) va dentro de otro container o container-fluid según fluid.
+
+Si hay dos columnas, aplicar la inversión con:
+
+:class="[{ 'flex-row-reverse': order === 'inverted' }]"
+
+Si son solo maximo 5 columnas y no son sliders , asigna automaticamente un orden a cada una, y mediante el prop orderColumns=[3,1,2,5] podamos reordenarlas con bootstrap, en caso que no , solo asigna un id eje column1,column2
+
+
+Los estilos deben usar mis tokens de diseño (--surface, --text, --accent, --surface-border, etc.), con <style lang="less" scoped> y variables coherentes.
+
+Incluir data-aos con animaciones (fade-up, fade-left, zoom-in, etc.) igual que en las demás sections por default, solo si tenemos la prop animate=false, no apliques AOS
+
+No modificar los esquemas de color, ni agregar nuevos colores.
+
+Mantener el estilo “glassy”, moderno, mobile-first, con rounded-4, shadow-sm o shadow-lg.
+
+Finalmente, entrega el componente completo y listo para usar (template, script setup y estilos LESS con scoped).”
+
+ 

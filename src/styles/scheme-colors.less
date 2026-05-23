@@ -1,0 +1,126 @@
+/* ============================================
+   SCHEME-COLORS.LESS
+   Sistema simplificado de colores por scheme
+   6 schemes: default, pink, purple (light/dark)
+   Contraste mejorado para accesibilidad WCAG AA
+   ============================================ */
+
+/* ============================================
+   DEFAULT LIGHT - grises neutros
+   Contraste: texto #1a1b1e sobre fondo #ffffff = ~16:1
+   ============================================ */
+body.scheme-default-light,
+.component-scheme-default-light {
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --surface-muted: #e5e7eb;
+  --surface-border: #c9cacd;
+  --text: #1a1b1e;
+  --text-muted: #5a5c61;
+  --accent: #3b3c42;
+  --accent-hover: #1f2023;
+  --accent-muted: #9ca3af;
+  --accent-contrast: #ffffff;
+  --heading-color: #0f1011;
+  --muted: #5a5c61;
+}
+
+/* ============================================
+   DEFAULT DARK - grises oscuros
+   Contraste: texto #f3f3f5 sobre fondo #141416 = ~14:1
+   ============================================ */
+body.scheme-default-dark,
+.component-scheme-default-dark {
+  --surface: #141416;
+  --surface-2: #1c1d20;
+  --surface-muted: #2a2b30;
+  --surface-border: #3d3e44;
+  --text: #f3f3f5;
+  --text-muted: #b4b5ba;
+  --accent: #a0a1a6;
+  --accent-hover: #c8c9cc;
+  --accent-muted: #5a5b60;
+  --accent-contrast: #0f1011;
+  --heading-color: #ffffff;
+  --muted: #b4b5ba;
+}
+
+/* ============================================
+   LIGHT-PINK - fondos claros, textos rosas oscuros
+   Contraste: texto #6b1036 sobre fondo #fdf2f8 = ~8:1
+   ============================================ */
+body.scheme-light-pink,
+.component-scheme-light-pink {
+  --surface: #fdf2f8;
+  --surface-2: #fae4ef;
+  --surface-muted: #f5c6d8;
+  --surface-border: #e8a4c4;
+  --text: #6b1036;
+  --text-muted: #9c3a5e;
+  --accent: #db2777;
+  --accent-hover: #be155c;
+  --accent-muted: #f9a8d4;
+  --accent-contrast: #ffffff;
+  --heading-color: #4a0a25;
+  --muted: #9c3a5e;
+}
+
+/* ============================================
+   DARK-PINK - fondos rosas oscuros, textos claros
+   Contraste: texto #fdf2f8 sobre fondo #6b1036 = ~7:1
+   ============================================ */
+body.scheme-dark-pink,
+.component-scheme-dark-pink {
+  --surface: #6b1036;
+  --surface-2: #7f1a45;
+  --surface-muted: #9f2a5a;
+  --surface-border: #c4457a;
+  --text: #fdf2f8;
+  --text-muted: #f8c6d8;
+  --accent: #f9a8d4;
+  --accent-hover: #fce4ec;
+  --accent-muted: #c4457a;
+  --accent-contrast: #4a0a25;
+  --heading-color: #ffffff;
+  --muted: #f8c6d8;
+}
+
+/* ============================================
+   LIGHT-PURPLE - fondos claros, textos púrpuras oscuros
+   Contraste: texto #3b1a6d sobre fondo #faf5ff = ~10:1
+   ============================================ */
+body.scheme-light-purple,
+.component-scheme-light-purple {
+  --surface: #faf5ff;
+  --surface-2: #ede9fe;
+  --surface-muted: #ddd6fe;
+  --surface-border: #c4b5fd;
+  --text: #3b1a6d;
+  --text-muted: #6d5a8e;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-muted: #a78bfa;
+  --accent-contrast: #ffffff;
+  --heading-color: #2a0a5c;
+  --muted: #6d5a8e;
+}
+
+/* ============================================
+   DARK-PURPLE - fondos púrpuras oscuros, textos claros
+   Contraste: texto #faf5ff sobre fondo #3b1a6d = ~9:1
+   ============================================ */
+body.scheme-dark-purple,
+.component-scheme-dark-purple {
+  --surface: #3b1a6d;
+  --surface-2: #4c2685;
+  --surface-muted: #5d32a0;
+  --surface-border: #7c3aed;
+  --text: #faf5ff;
+  --text-muted: #ddd6fe;
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --accent-muted: #7c3aed;
+  --accent-contrast: #2a0a5c;
+  --heading-color: #ffffff;
+  --muted: #ddd6fe;
+}

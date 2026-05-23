@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Countdown Section Schema",
+  "description": "Schema para secciones de countdown - 5 variantes",
+  "type": "object",
+  "required": ["type", "props"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "countdown"
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["countdown", "countdown1", "countdown2", "countdown3", "countdown4"],
+      "description": "Variante de countdown"
+    },
+    "props": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID único de la sección"
+        },
+        "title": {
+          "type": "string",
+          "description": "Título principal"
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Subtítulo descriptivo"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tags opcionales"
+        },
+        "metaInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "icon": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        },
+        "eventDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha del evento (ISO 8601)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Ubicación del evento"
+        },
+        "showProgress": {
+          "type": "boolean",
+          "description": "Mostrar barra de progreso (countdown1)"
+        },
+        "showShare": {
+          "type": "boolean",
+          "description": "Mostrar botón de compartir (countdown1)"
+        },
+        "icsUrl": {
+          "type": "string",
+          "description": "URL externa para archivo .ics"
+        },
+        "icsData": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "location": { "type": "string" },
+            "start": { "type": "string" },
+            "end": { "type": "string" }
+          }
+        },
+        "icsFilename": {
+          "type": "string",
+          "default": "evento.ics"
+        },
+        "scheme": {
+          "type": "string",
+          "enum": ["default-light", "default-dark", "light-pink", "dark-pink", "light-purple", "dark-purple"],
+          "default": "default-light"
+        }
+      },
+      "required": ["eventDate"]
+    }
+  },
+  "examples": [
+    {
+      "type": "countdown",
+      "variant": "countdown",
+      "props": {
+        "title": "Faltan pocos días",
+        "subtitle": "El gran día se acerca",
+        "tags": ["Evento", "Especial"],
+        "eventDate": "2026-12-31T18:00:00",
+        "icsFilename": "mi-evento.ics",
+        "scheme": "light-purple"
+      }
+    },
+    {
+      "type": "countdown",
+      "variant": "countdown1",
+      "props": {
+        "title": "Cuenta Regresiva Detallada",
+        "subtitle": "Cada segundo cuenta",
+        "tags": ["Tiempo Real", "Detallado"],
+        "eventDate": "2026-12-31T18:00:00",
+        "location": "Salón de Eventos Majestic",
+        "showProgress": true,
+        "showShare": true,
+        "scheme": "light-purple"
+      }
+    },
+    {
+      "type": "countdown",
+      "variant": "countdown2",
+      "props": {
+        "title": "Tiempo Remaining",
+        "subtitle": "Cada momento cuenta",
+        "tags": ["Circular", "Visual"],
+        "eventDate": "2026-12-31T18:00:00",
+        "scheme": "default-light"
+      }
+    },
+    {
+      "type": "countdown",
+      "variant": "countdown3",
+      "props": {
+        "title": "Flip Clock",
+        "subtitle": "El tiempo no se detiene",
+        "tags": ["Flip", "Animado"],
+        "eventDate": "2026-12-31T18:00:00",
+        "location": "Auditorio Central",
+        "scheme": "default-light"
+      }
+    },
+    {
+      "type": "countdown",
+      "variant": "countdown4",
+      "props": {
+        "title": "Our Event Starts In",
+        "subtitle": "Mark your calendar",
+        "tags": ["Minimal", "Split"],
+        "eventDate": "2026-12-31T18:00:00",
+        "location": "Centro de Convenciones",
+        "scheme": "default-light"
+      }
+    }
+  ]
+}

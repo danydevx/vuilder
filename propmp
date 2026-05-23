@@ -1,0 +1,248 @@
+Vamos a crear 4 color schemes para nuestras secciones
+
+
+
+.scheme-light {
+	/*Todos los elementos adoptaran la gama del scheme-light coo lo hace bootstrap y otros frameworks
+	h1,h2,h3 { color:dark;  }
+	p{ color:dark; }
+	button,a { color:dark;}
+
+	*/
+}
+
+Si aplicamos 
+
+.scheme-dark {
+		h1,h2,h3 {  color:light;  }
+	p{   color:light; }
+	button,a {  color:light; }
+
+ 
+}
+
+
+
+ 
+Entonces si tenemos una section <section class="section-ceremony scheme-light">Todos los elementos hijos deben  tener el scheme que definamos
+
+Para los colores base usaremos root , CSS3 con less  y la tecnica OCCSS
+
+ 
+
+ Te paso el primer Strap para que vayammos puliendo uno por uno, si ya hay colores en el strap eliminalos para aplicarlos en los schemes 
+
+
+<template>
+  <section
+    id="section-hero"
+    class="section-hero position-relative overflow-hidden text-center"
+    ref="sectionRef"
+  >
+    <!-- Capa fondo principal con parallax -->
+    <div
+      class="hero-bg"
+      :style="{
+        backgroundImage: `url(${backgroundImg})`,
+        transform: parallaxEnabled ? `translate3d(0, ${bgParallaxY}px, 0) scale(1.05)` : 'scale(1.05)'
+      }"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Overlay -->
+    <div class="hero-overlay" aria-hidden="true" />
+
+    <!-- Textura/imagen extra anclada al fondo -->
+    <div
+      v-if="bottomTextureImg"
+      class="hero-bottom-texture"
+      :style="{ backgroundImage: `url(${bottomTextureImg})` }"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Contenido -->
+    <div class="inner container position-relative z-1 d-flex flex-column justify-content-center align-items-center text-white min-vh-100">
+      <img
+        v-if="heroImage"
+        :src="heroImage"
+        :alt="namesText"
+        class="hero-image mb-4 rounded-circle shadow"
+      />
+
+      <p class="hero-phrase h5 mb-3">{{ phrase }}</p>
+      <h1 class="hero-names display-4 fw-bold mb-4">{{ namesText }}</h1>
+
+      <a
+        v-if="nextTarget"
+        :href="nextTarget"
+        class="btn btn-outline-light btn-lg rounded-pill"
+        :data-scroll-to="nextTarget"
+        @click.prevent="scrollTo(nextTarget)"
+      >
+        Ver más
+      </a>
+    </div>
+
+    <!-- Separador inferior SVG para unir con la siguiente sección -->
+    <div class="shape-separator" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-100 h-100">
+        <path
+          :fill="bottomShapeColor"
+          d="M0,64 C240,128 480,0 720,32 C960,64 1200,128 1440,96 L1440,120 L0,120 Z"
+        />
+      </svg>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
+
+const props = defineProps({
+  phrase: { type: String, default: '¡Nos comprometimos!' },
+  names: { type: [String, Array], default: () => ['Ana', 'Luis'] },
+  backgroundImg: { type: String, default: 'https://placehold.co/1920x1200/jpg?text=Fondo' },
+  heroImage: { type: String, default: 'https://placehold.co/400x400/jpg?text=Nosotros' },
+  nextTarget: { type: String, default: '#section-cover' },
+  /** Parallax */
+  parallax: { type: Boolean, default: true },
+  parallaxStrength: { type: Number, default: 0.35 }, // 0.2 - 0.6 recomendado
+  /** Decoración inferior */
+  bottomTextureImg: { type: String, default: 'https://placehold.co/1600x500/png?text=Decor' },
+  bottomShapeColor: { type: String, default: '#ffffff' }
+})
+
+const namesText = computed(() =>
+  Array.isArray(props.names) ? props.names.join(' & ') : props.names
+)
+
+function scrollTo(selector) {
+  const el = document.querySelector(selector)
+  el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+/* Parallax */
+const sectionRef = ref(null)
+const bgParallaxY = ref(0)
+let rAF = null
+let ticking = false
+let parallaxEnabled = true
+
+const prefersReduced = typeof window !== 'undefined'
+  ? window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+  : false
+
+onMounted(() => {
+  parallaxEnabled = props.parallax && !prefersReduced
+  if (!parallaxEnabled) return
+
+  const onScroll = () => {
+    if (ticking) return
+    ticking = true
+    rAF = requestAnimationFrame(updateParallax)
+  }
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll, { passive: true })
+  // primer cálculo
+  onScroll()
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('scroll', onScroll)
+    window.removeEventListener('resize', onScroll)
+    if (rAF) cancelAnimationFrame(rAF)
+  })
+})
+
+function updateParallax() {
+  ticking = false
+  const el = sectionRef.value
+  if (!el) return
+
+  const rect = el.getBoundingClientRect()
+  const vh = window.innerHeight || 1
+  // progreso de visibilidad: 0 cuando está fuera por abajo, 1 cuando centra
+  const progress = 1 - (rect.top + rect.height / 2) / (vh + rect.height / 2)
+  // rango de desplazamiento en px
+  const maxShift = 80 // tope de movimiento para evitar mareo
+  const shift = clamp(progress * (props.parallaxStrength * 200), -maxShift, maxShift)
+  bgParallaxY.value = Math.round(shift)
+}
+
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v))
+}
+</script>
+
+<style scoped>
+.section-hero {
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+  /* Evita saltos cuando aparece la barra de direcciones móvil */
+  min-height: 100svh;
+}
+
+/* Fondo principal */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  will-change: transform;
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.45) 100%);
+  z-index: 0;
+}
+
+/* Textura inferior (imagen adicional anclada al fondo) */
+.hero-bottom-texture {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 56px; /* deja espacio para el separador SVG */
+  height: clamp(120px, 18vh, 280px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  opacity: .35;            /* sutil para no competir con el contenido */
+  filter: blur(0.2px);     /* suaviza píxeles en moviles */
+  z-index: 0;
+}
+
+/* Contenido */
+.hero-image {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+.hero-phrase {
+  text-shadow: 0 6px 16px rgba(0,0,0,.4);
+}
+.hero-names {
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Separador inferior SVG */
+.shape-separator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px; /* evita línea por escalado */
+  height: 56px;
+  z-index: 1;
+  line-height: 0;
+}
+.shape-separator svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+</style>

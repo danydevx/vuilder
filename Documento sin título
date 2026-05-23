@@ -1,0 +1,41 @@
+# AGENTS.md
+
+## Stack
+- Vue 3 (Composition API, `<script setup>`) + Vite + Bootstrap 5
+- LESS for styles (preprocessor with `javascriptEnabled: true`)
+- Pinia for state
+- No TypeScript
+
+## Dev commands
+```sh
+npm run dev   # dev server
+npm run build # production build
+npm run preview
+```
+
+## Path aliases
+`@` → `src/`, `@assets`, `@styles`, `@components`, `@sections`, `@partials`, `@pages`
+
+## Sections location
+Sections live in `src/sections/` and `src/sections/terrazas/`. Each is a self-contained Vue component. No `src/builder/` directory exists.
+
+## LESS global import
+`src/styles/main.less` is auto-imported into every `.less` file via `vite.config.js` `additionalData`.
+
+## Props convention
+Sections typically receive props from objects with `config`, `header.config`, `header.content`, and `content` keys:
+```js
+const sectionProps = computed(() => ({
+  ...section.config,
+  ...section.header?.config,
+  ...section.header?.content,
+  ...section.content
+}))
+```
+
+## Rules
+- No TypeScript conversion
+- No removing props that are in use
+- Preserve Bootstrap 5 classes
+- No new dependencies
+- Run `npm run build` before assuming something works

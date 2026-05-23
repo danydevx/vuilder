@@ -1,0 +1,50 @@
+Estoy trabajando en mi proyecto de invitaciones y landing pages para terrazas de eventos (basado en Vue 3, Bootstrap 5, Less y Swiper).  
+Cada sección es un componente Vue reutilizable dentro de `src/sections/terrazas/`.  
+
+Quiero seguir **refactorizando y creando nuevas secciones** (ej: Social, Gallery, Map, Party, Faq, Calendar, etc.) con las mismas reglas visuales y estructurales que ya tengo definidas:
+
+🧩 **Reglas generales:**
+- Uso Vue 3 `<script setup>` y `<style lang="less" scoped>`.
+- Props estándar:  
+  `id`, `scheme`, `title`, `subtitle`, `backgroundImg`, `enableOverlay`,  
+  `params`, `ctas`, `align`, `order`, `fluid`, `animate`.
+- Si hay dos columnas, `order="inverted"` invierte la posición.  
+- Uso `schemeClass = computed(() => 'component-scheme-' + props.scheme)` para aplicar color tokens.  
+- Todas las secciones deben respetar mis **design tokens** (variables CSS como `--surface`, `--text`, `--accent`, `--text-muted`, `--accent-contrast`, etc.).  
+- Efectos con **AOS** se controlan con la prop `animate` (si es `false`, no agrega `data-aos`).  
+- Siempre incluir `<style lang="less" scoped>` con colores, sombras y espaciados basados en mis tokens.
+- Fondo y overlay con `pointer-events: none` y `z-index` bien definidos.  
+- `fluid` controla si el contenedor es `.container` o `.container-fluid px-3 px-md-5`.
+- Respetar mis componentes previos (`SectionSocial1–7`, `SectionFaqChat`, `SectionFaqs5`, `SectionCalendar2`, etc.) como guía visual.
+
+🎨 **Estilo visual:**
+- Moderno, limpio, elegante, móvil primero.  
+- Usa `rounded-4`, `shadow-sm`, `shadow-lg` donde aplique.  
+- Animaciones sutiles con `AOS` y `color-mix` para hovers.
+- Evita colores adicionales; usa los tokens del esquema activo.
+
+⚙️ **Librerías disponibles:**
+- `Swiper`, `GLightbox`, `AOS`, `Bootstrap Icons`.
+
+✨ **Tu tarea:**
+Cuando te pida una nueva sección o modificar una existente, genera el **código completo del componente Vue** (template + script + style) siguiendo estas convenciones.  
+Mantén coherencia visual con las secciones anteriores y no elimines funcionalidades (como formularios, lightbox, overlays, animaciones o props dinámicas).
+
+---
+
+Luego de pegar este prompt, puedo pedirte cosas como:
+- “Refactoriza mi `SectionGallery5.vue` para usar masonry con lightbox.”  
+- “Crea `SectionSocial8.vue` tipo carrusel con Swiper automático.”  
+- “Agrega la prop `order='inverted'` en `SectionMapLeaflet2.vue`.”  
+- “Mejora el UX móvil de `SectionCalendar2.vue` sin cambiar el diseño.”
+
+---
+
+¿Quieres que te lo formatee como un **snippet JSON** listo para guardar y reutilizar en ChatGPT o VS Code como “Plantilla Terrazas”?
+
+
+{
+  "name": "Plantilla Terrazas",
+  "description": "Prompt maestro para continuar modificando y creando secciones del proyecto Terrazas en Vue 3 con Less y Bootstrap 5.",
+  "prompt": "Estoy trabajando en mi proyecto de invitaciones y landing pages para terrazas de eventos (basado en Vue 3, Bootstrap 5, Less y Swiper). Cada sección es un componente Vue reutilizable dentro de src/sections/terrazas/.\n\nQuiero seguir refactorizando y creando nuevas secciones (ej: Social, Gallery, Map, Party, Faq, Calendar, etc.) con las mismas reglas visuales y estructurales que ya tengo definidas:\n\n🧩 **Reglas generales:**\n- Uso Vue 3 <script setup> y <style lang=\"less\" scoped>.\n- Props estándar: id, scheme, title, subtitle, backgroundImg, enableOverlay, params, ctas, align, order, fluid, animate.\n- Si hay dos columnas, order=\"inverted\" invierte la posición.\n- Uso schemeClass = computed(() => 'component-scheme-' + props.scheme) para aplicar color tokens.\n- Todas las secciones deben respetar mis design tokens (variables CSS como --surface, --text, --accent, --text-muted, --accent-contrast, etc.).\n- Efectos con AOS se controlan con la prop animate (si es false, no agrega data-aos).\n- Siempre incluir <style lang=\"less\" scoped> con colores, sombras y espaciados basados en mis tokens.\n- Fondo y overlay con pointer-events: none y z-index bien definidos.\n- fluid controla si el contenedor es .container o .container-fluid px-3 px-md-5.\n- Respetar mis componentes previos (SectionSocial1–7, SectionFaqChat, SectionFaqs5, SectionCalendar2, etc.) como guía visual.\n\n🎨 **Estilo visual:**\n- Moderno, limpio, elegante, móvil primero.\n- Usa rounded-4, shadow-sm, shadow-lg donde aplique.\n- Animaciones sutiles con AOS y color-mix para hovers.\n- Evita colores adicionales; usa los tokens del esquema activo.\n\n⚙️ **Librerías disponibles:**\n- Swiper, GLightbox, AOS, Bootstrap Icons.\n\n✨ **Tu tarea:**\nCuando te pida una nueva sección o modificar una existente, genera el código completo del componente Vue (template + script + style) siguiendo estas convenciones. Mantén coherencia visual con las secciones anteriores y no elimines funcionalidades (como formularios, lightbox, overlays, animaciones o props dinámicas).\n\nLuego de pegar este prompt, puedo pedirte cosas como:\n- “Refactoriza mi SectionGallery5.vue para usar masonry con lightbox.”\n- “Crea SectionSocial8.vue tipo carrusel con Swiper automático.”\n- “Agrega la prop order='inverted' en SectionMapLeaflet2.vue.”\n- “Mejora el UX móvil de SectionCalendar2.vue sin cambiar el diseño.”"
+}

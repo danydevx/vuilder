@@ -1,0 +1,39 @@
+{
+  "type": "hero",
+  "description": "Hero principal con título, subtítulo y CTAs",
+  "category": "hero",
+  "props": {
+    "id": { "type": "string", "default": "hero", "description": "ID de la sección" },
+    "scheme": { "type": "string", "default": "default-light", "description": "Esquema de color" },
+    "title": { "type": "string", "required": true, "description": "Título principal" },
+    "subtitle": { "type": "string", "description": "Subtítulo" },
+    "body": { "type": "string", "description": "Descripción adicional" },
+    "icon": { "type": "string", "description": "Icono Bootstrap (ej: bi bi-star)" },
+    "ctas": {
+      "type": "array",
+      "description": "Botones de acción",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "href": { "type": "string" },
+          "variant": { "type": "string", "enum": ["solid", "outline"] },
+          "icon": { "type": "string" }
+        }
+      }
+    }
+  },
+  "example": {
+    "type": "hero",
+    "props": {
+      "title": "Bienvenido a Vueilder",
+      "subtitle": "Crea sitios web hermosos con Vue",
+      "body": "El framework más moderno para desarrollo web",
+      "icon": "bi bi-rocket",
+      "ctas": [
+        { "label": "Comenzar", "href": "#inicio", "variant": "solid", "icon": "bi bi-arrow-right" },
+        { "label": "Saber más", "href": "#info", "variant": "outline", "icon": "bi bi-info-circle" }
+      ]
+    }
+  }
+}

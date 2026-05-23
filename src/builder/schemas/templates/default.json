@@ -1,0 +1,44 @@
+{
+  "page": {
+    "title": "Mi Página",
+    "scheme": "default-light",
+    "meta": {
+      "description": "Descripción de la página",
+      "author": "Autor"
+    },
+    "sections": [
+      {
+        "type": "hero",
+        "id": "hero-principal",
+        "scheme": "light-purple",
+        "props": {
+          "title": "Bienvenido a mi sitio",
+          "subtitle": "La mejor experiencia para tu negocio",
+          "body": "Descripción del hero...",
+          "ctas": [
+            { "label": "Ver más", "href": "#servicios", "variant": "solid", "icon": "bi bi-arrow-right" },
+            { "label": "Contacto", "href": "#contacto", "variant": "outline", "icon": "bi bi-envelope" }
+          ]
+        }
+      },
+      {
+        "type": "content1",
+        "id": "intro-content",
+        "scheme": "default-light",
+        "props": {
+          "title": "Sobre Nosotros",
+          "subtitle": "Conoce nuestra historia"
+        }
+      },
+      {
+        "type": "services",
+        "id": "servicios-principal",
+        "scheme": "default-light",
+        "props": {
+          "title": "Nuestros Servicios",
+          "subtitle": "Lo que podemos hacer por ti"
+        }
+      }
+    ]
+  }
+}

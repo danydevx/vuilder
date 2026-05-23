@@ -1,0 +1,1918 @@
+:root {
+  /* Neutros con menos brillo (no blanco puro) */
+  --surface:         #f7f7f9;   /* antes: #ffffff */
+  --surface-2:       #f1f2f5;   /* antes: #f9f9f9 */
+  --surface-muted:   #e9eaef;   /* antes: #f0f0f0 */
+  --surface-border:  #dadbe2;   /* antes: #e0e0e0 */
+
+  /* Tinte sutil para evitar la “pure white fatigue” */
+  --surface-overlay: rgba(20, 15, 25, 0.035); /* leve tinte frío-violeta */
+  --shape-fill:      #fafafb;
+
+  /* Texto levemente más suave (no #111 ultra duro) */
+  --text:            #17181c;   /* antes #1a1a1a */
+  --text-inverse:    #ffffff;
+  --muted:           #6b7280;
+  --text-secondary:  var(--muted);
+
+  /* Acento gris (sin cambios fuertes) */
+  --accent:          #4b5563;
+  --accent-contrast: #ffffff;
+  --accent-hover:    #374151;
+  --accent-active:   color-mix(in oklab, var(--accent), black 18%);
+  --accent-muted:    #9ca3af;
+
+  /* Secundario */
+  --accent-secondary:        #9ca3af;
+  --accent-secondary-hover:  #6b7280;
+  --accent-secondary-active: color-mix(in oklab, var(--accent-secondary), black 18%);
+  --accent-secondary-muted:  #d1d5db;
+  --accent-secondary-contrast: #0f1115;
+
+  /* Estados (iguales) */
+  --success:         #16a34a;
+  --warning:         #ca8a04;
+  --danger:          #dc2626;
+  --info:            #2563eb;
+
+  /* Derivados con base menos blanca (bajan el brillo del fondo de estado) */
+  --success-bg:      color-mix(in oklab, var(--success), var(--surface) 84%);
+  --success-text:    color-mix(in oklab, var(--success), var(--text) 35%);
+  --warning-bg:      color-mix(in oklab, var(--warning), var(--surface) 84%);
+  --warning-text:    color-mix(in oklab, var(--warning), var(--text) 28%);
+  --danger-bg:       color-mix(in oklab, var(--danger),  var(--surface) 86%);
+  --danger-text:     color-mix(in oklab, var(--danger),  var(--text) 35%);
+  --info-bg:         color-mix(in oklab, var(--info), var(--surface) 84%);
+  --info-text:       color-mix(in oklab, var(--info), var(--text) 35%);
+
+  /* Tipografía (igual) */
+  --h1-size:           clamp(2.5rem, 5vw, 3.5rem);
+  --h2-size:           clamp(2rem, 4vw, 2.2rem);
+  --h3-size:           clamp(1.5rem, 3vw, 2rem);
+  --h4-size:           clamp(1.25rem, 2.5vw, 1.5rem);
+  --h5-size:           clamp(1.1rem, 2vw, 1.25rem);
+  --h6-size:           clamp(1rem, 1.5vw, 1.1rem);
+  --heading-color:     #14151a; /* un toque menos duro que #111 */
+  --heading-accent:    var(--accent);
+  --heading-weight:    700;
+  --heading-line-height: 1.1;
+  --heading-letter-spacing: -0.02em;
+  --subtitle-color:    #535968;
+  --subtitle-size:     clamp(1rem, 2vw, 1.25rem);
+  --subtitle-weight:   400;
+  --subtitle-line-height: 1.4;
+
+  /* Sombras más blandas (evitan halo gris) */
+  --border:           var(--surface-border);
+  --ring:             rgba(0,0,0,0.08);
+  --shadow:           0 6px 22px rgba(10, 12, 16, 0.10);
+  --shadow-sm:        0 2px 8px rgba(10, 12, 16, 0.06);
+  --shadow-lg:        0 12px 36px rgba(10, 12, 16, 0.16);
+
+  --shadow-secondary:    0 6px 22px rgba(10, 12, 16, 0.08);
+  --shadow-secondary-sm: 0 2px 8px rgba(10, 12, 16, 0.04);
+  --shadow-secondary-lg: 0 12px 36px rgba(10, 12, 16, 0.12);
+
+  /* Gradientes (ligeramente más opacos) */
+  --gradient-dark:    rgba(17, 19, 23, 0.62);
+  --gradient-light:   rgba(236, 238, 243, 0.22);
+  --gradient-accent:  linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-secondary-hover) 100%);
+
+  /* Cards */
+  --card-stroke:        rgba(20, 21, 26, 0.08);
+  --card-stroke-strong: rgba(20, 21, 26, 0.14);
+  --card-bg-glass:      color-mix(in oklab, var(--surface), transparent 10%);
+  --card-radius:        1rem;
+  --card-padding:       1.5rem;
+
+  /* Formularios (sube contraste sin “blanquear”) */
+  --field-bg:          color-mix(in oklab, var(--surface-2), black 6%);  /* antes: 4% */
+  --field-fg:          var(--text);
+  --field-border:      color-mix(in oklab, var(--surface-border), black 8%);
+  --field-bg-hover:    color-mix(in oklab, var(--field-bg), black 4%);
+  --field-bg-focus:    color-mix(in oklab, var(--field-bg), black 6%);
+  --field-placeholder: color-mix(in oklab, var(--field-fg), transparent 55%);
+  --field-disabled-bg: color-mix(in oklab, var(--field-bg), white 6%);
+  --field-disabled-fg: color-mix(in oklab, var(--field-fg), transparent 35%);
+  --field-radius:      0.75rem;
+
+  /* Badges */
+  --badge-bg:          color-mix(in oklab, var(--text), var(--surface) 72%);
+  --badge-fg:          var(--text-inverse);
+  --badge-border:      color-mix(in oklab, var(--text), white 55%);
+  --badge-bg-hover:    color-mix(in oklab, var(--badge-bg), white 6%);
+  --badge-radius:      9999px;
+}
+
+/* Asegura que el body ya no se pinte “blanco puro” */
+body {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* =========================================================
+   2) ESQUEMAS (solo redefinen tokens) - MEJORADOS
+   ========================================================= */
+
+/* ===== ESQUEMA ROSA (CLARO) ===== */
+body.scheme-rose-light,
+.component-scheme-rose-light {
+  /* Superficies */
+  --surface:                 #fff5f7;
+  --surface-2:               #fffafd;
+  --surface-muted:           #ffe4ec;
+  --surface-border:          #f8ccd8;
+  --surface-overlay:         rgba(255, 192, 203, 0.15);
+
+  /* Texto */
+  --text:                    #5a002e;
+  --text-muted:              #8a4c66;
+  --text-inverse:            #ffffff;
+  --heading-color:           #831843;
+
+  /* Acentos */
+  --accent:                  #e91e63;
+  --accent-hover:            #d81b60;
+  --accent-active:           color-mix(in oklab, #e91e63, black 18%);
+  --accent-muted:            #fbb6ce;
+  --accent-contrast:         #ffffff;
+
+  /* Acento secundario (teal/amber blend para chips/badges) */
+  --accent-secondary:        #14b8a6;
+  --accent-secondary-hover:  #0d9488;
+  --accent-secondary-active: color-mix(in oklab, #14b8a6, black 18%);
+  --accent-secondary-muted:  #b7f2ea;
+  --accent-secondary-contrast: #ffffff;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(90, 0, 46, 0.18);
+  --ring:                    rgba(233, 30, 99, 0.35);
+  --overlay:                 rgba(0, 0, 0, 0.18);
+
+  /* Sombras */
+  --shadow:                  0 4px 12px rgba(233, 30, 99, 0.15);
+  --shadow-sm:               0 2px 8px rgba(233, 30, 99, 0.08);
+  --shadow-lg:               0 12px 40px rgba(233, 30, 99, 0.20);
+  --shadow-secondary:        0 4px 12px rgba(20, 184, 166, 0.15);
+
+  /* Cards */
+  --card-stroke:             rgba(90, 0, 46, 0.12);
+  --card-stroke-strong:      rgba(90, 0, 46, 0.24);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), white 6%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), white 8%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), white 10%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), white 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), white 12%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), white 6%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 45%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #10b981;  /* emerald 500 */
+  --warning:                 #f59e0b;  /* amber 500 */
+  --danger:                  #ef4444;  /* red 500 */
+}
+
+/* ====== ROSE DARK ====== */
+body.scheme-rose-dark,
+.component-scheme-rose-dark  {
+  /* Superficies */
+  --surface:                 #2a0a16;
+  --surface-2:               #3a1020;
+  --surface-muted:           #441a27;
+  --surface-border:          #99334d;
+  --surface-overlay:         rgba(0, 0, 0, 0.35);
+
+  /* Texto */
+  --text:                    #fce4ec;
+  --text-muted:              #dfa4b4;
+  --text-inverse:            #1c0a0e;
+  --heading-color:           #ffffff;
+
+  /* Acentos */
+  --accent:                  #ff4081;
+  --accent-hover:            #ff77a9;
+  --accent-active:           color-mix(in oklab, #ff4081, white 14%);
+  --accent-muted:            #77223a;
+  --accent-contrast:         #1c0a0e;
+
+  /* Acento secundario */
+  --accent-secondary:        #14b8a6;
+  --accent-secondary-hover:  #0d9488;
+  --accent-secondary-active: color-mix(in oklab, #14b8a6, white 14%);
+  --accent-secondary-muted:  #115e59;
+  --accent-secondary-contrast: #051b1a;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(255, 255, 255, 0.14);
+  --ring:                    rgba(255, 64, 129, 0.45);
+  --overlay:                 rgba(0, 0, 0, 0.45);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(255, 64, 129, 0.20);
+  --shadow-sm:               0 2px 12px rgba(255, 64, 129, 0.15);
+  --shadow-lg:               0 12px 48px rgba(255, 64, 129, 0.25);
+  --shadow-secondary:        0 4px 20px rgba(20, 184, 166, 0.20);
+
+  /* Cards */
+  --card-stroke:             rgba(255, 255, 255, 0.12);
+  --card-stroke-strong:      rgba(255, 255, 255, 0.24);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), white 6%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), white 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), white 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), white 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), white 6%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 45%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #34d399;  /* emerald 400 (más brillo en dark) */
+  --warning:                 #fbbf24;  /* amber 400 */
+  --danger:                  #f87171;  /* red 400 */
+}
+
+/* ====== ROSE GOLD VARIANT ====== */
+body.scheme-rose-gold,
+.component-scheme-rose-gold {
+  /* Superficies - tonos dorados oscuros con base rosa */
+  --surface:                 #1f0d13;
+  --surface-2:               #2a1219;
+  --surface-muted:           #351820;
+  --surface-border:          #8c6d4d;
+  --surface-overlay:         rgba(184, 134, 11, 0.25);
+
+  /* Texto - dorado suave y rosas claros */
+  --text:                    #f8e9d4;
+  --text-muted:              #d4b896;
+  --text-inverse:            #1a0d0a;
+  --heading-color:           #ffd700;
+
+  /* Acentos - rosa dorado */
+  --accent:                  #e6b87e;
+  --accent-hover:            #f0c896;
+  --accent-active:           color-mix(in oklab, #e6b87e, white 12%);
+  --accent-muted:            #8c6d4d;
+  --accent-contrast:         #1a0d0a;
+
+  /* Acento secundario - rosa intenso */
+  --accent-secondary:        #d46a8c;
+  --accent-secondary-hover:  #e67b9d;
+  --accent-secondary-active: color-mix(in oklab, #d46a8c, white 14%);
+  --accent-secondary-muted:  #8c4a63;
+  --accent-secondary-contrast: #1a0d0a;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(230, 184, 126, 0.25);
+  --ring:                    rgba(230, 184, 126, 0.4);
+  --overlay:                 rgba(0, 0, 0, 0.5);
+
+  /* Sombras - tonos dorados */
+  --shadow:                  0 4px 20px rgba(230, 184, 126, 0.25);
+  --shadow-sm:               0 2px 12px rgba(230, 184, 126, 0.15);
+  --shadow-lg:               0 12px 48px rgba(230, 184, 126, 0.35);
+  --shadow-secondary:        0 4px 20px rgba(212, 106, 140, 0.25);
+
+  /* Cards */
+  --card-stroke:             rgba(230, 184, 126, 0.15);
+  --card-stroke-strong:      rgba(230, 184, 126, 0.3);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 8%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #e6b87e 6%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #e6b87e 10%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #e6b87e 8%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #e6b87e 12%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 20%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #a7f3d0;
+  --warning:                 #fde68a;
+  --danger:                  #fca5a5;
+}
+
+/* ====== ROSE VINTAGE VARIANT ====== */
+body.scheme-rose-vintage,
+.component-scheme-rose-vintage  {
+  /* Superficies - tonos sepia y rosas desaturados */
+  --surface:                 #2d1b1f;
+  --surface-2:               #3d252b;
+  --surface-muted:           #4d2f36;
+  --surface-border:          #8d6e63;
+  --surface-overlay:         rgba(121, 85, 72, 0.3);
+
+  /* Texto - rosas antiguos y marfiles */
+  --text:                    #f5e6e8;
+  --text-muted:              #d7b8bd;
+  --text-inverse:            #2d1b1f;
+  --heading-color:           #f8bbd0;
+
+  /* Acentos - rosa vintage */
+  --accent:                  #c48b9f;
+  --accent-hover:            #d49fb3;
+  --accent-active:           color-mix(in oklab, #c48b9f, white 12%);
+  --accent-muted:            #7d5d6b;
+  --accent-contrast:         #2d1b1f;
+
+  /* Acento secundario - terracota */
+  --accent-secondary:        #a1887f;
+  --accent-secondary-hover:  #b8a099;
+  --accent-secondary-active: color-mix(in oklab, #a1887f, white 14%);
+  --accent-secondary-muted:  #6d4c41;
+  --accent-secondary-contrast: #2d1b1f;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(196, 139, 159, 0.25);
+  --ring:                    rgba(196, 139, 159, 0.35);
+  --overlay:                 rgba(45, 27, 31, 0.6);
+
+  /* Sombras - suaves y cálidas */
+  --shadow:                  0 4px 20px rgba(196, 139, 159, 0.2);
+  --shadow-sm:               0 2px 12px rgba(196, 139, 159, 0.15);
+  --shadow-lg:               0 12px 48px rgba(196, 139, 159, 0.3);
+  --shadow-secondary:        0 4px 20px rgba(161, 136, 127, 0.2);
+
+  /* Cards */
+  --card-stroke:             rgba(196, 139, 159, 0.12);
+  --card-stroke-strong:      rgba(196, 139, 159, 0.25);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 12%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #c48b9f 4%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #c48b9f 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #c48b9f 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #c48b9f 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 50%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 25%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 60%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #a7f3d0;
+  --warning:                 #fde68a;
+  --danger:                  #fca5a5;
+}
+
+/* ====== ROSE BERRY VARIANT ====== */
+body.scheme-rose-berry,
+.component-scheme-rose-berry  {
+  /* Superficies - tonos morados oscuros con base roja */
+  --surface:                 #1a0d19;
+  --surface-2:               #251225;
+  --surface-muted:           #301730;
+  --surface-border:          #8b2c5c;
+  --surface-overlay:         rgba(139, 44, 92, 0.3);
+
+  /* Texto - rosas vibrantes y morados claros */
+  --text:                    #f8e3ec;
+  --text-muted:              #d4a8bb;
+  --text-inverse:            #1a0d19;
+  --heading-color:           #ff6b9d;
+
+  /* Acentos - rosa berry intenso */
+  --accent:                  #e91e63;
+  --accent-hover:            #ff4081;
+  --accent-active:           color-mix(in oklab, #e91e63, white 15%);
+  --accent-muted:            #8b2c5c;
+  --accent-contrast:         #1a0d19;
+
+  /* Acento secundario - morado berry */
+  --accent-secondary:        #9c27b0;
+  --accent-secondary-hover:  #ba68c8;
+  --accent-secondary-active: color-mix(in oklab, #9c27b0, white 14%);
+  --accent-secondary-muted:  #6a1b9a;
+  --accent-secondary-contrast: #1a0d19;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(233, 30, 99, 0.3);
+  --ring:                    rgba(233, 30, 99, 0.5);
+  --overlay:                 rgba(26, 13, 25, 0.7);
+
+  /* Sombras - intensas y vibrantes */
+  --shadow:                  0 4px 20px rgba(233, 30, 99, 0.3);
+  --shadow-sm:               0 2px 12px rgba(233, 30, 99, 0.2);
+  --shadow-lg:               0 12px 48px rgba(233, 30, 99, 0.4);
+  --shadow-secondary:        0 4px 20px rgba(156, 39, 176, 0.3);
+
+  /* Cards */
+  --card-stroke:             rgba(233, 30, 99, 0.2);
+  --card-stroke-strong:      rgba(233, 30, 99, 0.35);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #e91e63 5%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #e91e63 12%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #e91e63 8%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #e91e63 15%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 40%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 30%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 65%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #69f0ae;
+  --warning:                 #ffd54f;
+  --danger:                  #ff5252;
+}
+
+/* ====== ROSE BLUSH VARIANT ====== */
+body.scheme-rose-blush,
+.component-scheme-rose-blush {
+  /* Superficies - tonos rosas oscuros suaves */
+  --surface:                 #25161c;
+  --surface-2:               #321e27;
+  --surface-muted:           #3f2632;
+  --surface-border:          #a86b7c;
+  --surface-overlay:         rgba(168, 107, 124, 0.25);
+
+  /* Texto - rosas pálidos y suaves */
+  --text:                    #f7eef1;
+  --text-muted:              #d9c2ca;
+  --text-inverse:            #25161c;
+  --heading-color:           #ffb6c1;
+
+  /* Acentos - rosa blush suave */
+  --accent:                  #f4acb7;
+  --accent-hover:            #ffc1cc;
+  --accent-active:           color-mix(in oklab, #f4acb7, white 10%);
+  --accent-muted:            #a86b7c;
+  --accent-contrast:         #25161c;
+
+  /* Acento secundario - lila suave */
+  --accent-secondary:        #c8a2c8;
+  --accent-secondary-hover:  #d8b8d8;
+  --accent-secondary-active: color-mix(in oklab, #c8a2c8, white 12%);
+  --accent-secondary-muted:  #9a7b9a;
+  --accent-secondary-contrast: #25161c;
+
+  /* Bordes / anillos / overlay */
+  --border:                  rgba(244, 172, 183, 0.25);
+  --ring:                    rgba(244, 172, 183, 0.35);
+  --overlay:                 rgba(37, 22, 28, 0.6);
+
+  /* Sombras - suaves y difusas */
+  --shadow:                  0 4px 20px rgba(244, 172, 183, 0.2);
+  --shadow-sm:               0 2px 12px rgba(244, 172, 183, 0.15);
+  --shadow-lg:               0 12px 48px rgba(244, 172, 183, 0.25);
+  --shadow-secondary:        0 4px 20px rgba(200, 162, 200, 0.2);
+
+  /* Cards */
+  --card-stroke:             rgba(244, 172, 183, 0.15);
+  --card-stroke-strong:      rgba(244, 172, 183, 0.25);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 15%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #f4acb7 4%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #f4acb7 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #f4acb7 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #f4acb7 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 20%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #87d4a5;
+  --warning:                 #ffd893;
+  --danger:                  #ff9a9a;
+}
+
+/* ====== ROSA MEXICANO VARIANT ====== */
+body.scheme-rose-mexicano,
+.component-scheme-rose-mexicano {
+  /* Superficies - tonos vibrantes de fondo */
+  --surface:                 #fff0f6;   /* fondo base suave */
+  --surface-2:               #ffe4ef;   /* tono ligeramente más fuerte */
+  --surface-muted:           #ffd6e8;   /* variante para secciones */
+  --surface-border:          #f8b2ce;   /* bordes suaves */
+  --surface-overlay:         rgba(229, 0, 130, 0.05);
+
+  /* Texto */
+  --text:                    #2b0a19;   /* casi negro */
+  --text-muted:              #8c3a5c;   /* violeta-rosado apagado */
+  --text-inverse:            #ffffff;
+  --heading-color:           #b1005d;
+
+  /* Acentos - rosa mexicano */
+  --accent:                  #e50082;   /* rosa mexicano principal */
+  --accent-hover:            #c2006e;   /* más oscuro en hover */
+  --accent-active:           color-mix(in oklab, #e50082, black 15%);
+  --accent-muted:            #f7a6cd;   /* versión pastel */
+  --accent-contrast:         #ffffff;   /* botones con texto blanco */
+
+  /* Acento secundario - rosa oscuro */
+  --accent-secondary:        #9d004a;  /* rosa oscuro para contraste */
+  --accent-secondary-hover:  #7c003b;
+  --accent-secondary-active: color-mix(in oklab, #9d004a, black 10%);
+  --accent-secondary-muted:  #c2668f;
+  --accent-secondary-contrast: #ffffff;
+
+  /* Bordes / overlays */
+  --border:                  rgba(229, 0, 130, 0.25);
+  --ring:                    rgba(229, 0, 130, 0.35);
+  --overlay:                 rgba(43, 10, 25, 0.65);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(229, 0, 130, 0.18);
+  --shadow-sm:               0 2px 12px rgba(229, 0, 130, 0.12);
+  --shadow-lg:               0 12px 48px rgba(229, 0, 130, 0.25);
+  --shadow-secondary:        0 4px 20px rgba(157, 0, 74, 0.25);
+
+  /* Cards */
+  --card-stroke:             rgba(229, 0, 130, 0.15);
+  --card-stroke-strong:      rgba(229, 0, 130, 0.25);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 15%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #e50082 3%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #e50082 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #e50082 5%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #e50082 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 20%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #86efac;   /* verde pastel */
+  --warning:                 #fde047;   /* amarillo brillante */
+  --danger:                  #f87171;   /* rojo vibrante */
+}
+
+/* ====== ROSA MEXICANO DARK VARIANT ====== */
+body.scheme-rose-mexicano-dark,
+.component-scheme-rose-mexicano-dark {
+  /* Superficies - base oscura con matices rosados */
+  --surface:                 #1a0a11;  /* fondo base profundo */
+  --surface-2:               #260f1a;  /* capa intermedia */
+  --surface-muted:           #331428;  /* tono de contraste */
+  --surface-border:          #602843;  /* bordes */
+  --surface-overlay:         rgba(229, 0, 130, 0.15);
+
+  /* Texto */
+  --text:                    #fce7f3;   /* texto principal claro */
+  --text-muted:              #fbb6ce;   /* texto atenuado */
+  --text-inverse:            #1a0a11;   /* sobre botones claros */
+  --heading-color:           #ff4da6;   /* headings brillantes */
+
+  /* Acentos - rosa mexicano vivo */
+  --accent:                  #e50082;
+  --accent-hover:            #ff3399;
+  --accent-active:           color-mix(in oklab, #e50082, white 15%);
+  --accent-muted:            #9d3367;
+  --accent-contrast:         #ffffff;
+
+  /* Acento secundario - más oscuro (vino/magenta) */
+  --accent-secondary:        #7a003a;
+  --accent-secondary-hover:  #99004a;
+  --accent-secondary-active: color-mix(in oklab, #7a003a, white 10%);
+  --accent-secondary-muted:  #c2668f;
+  --accent-secondary-contrast: #ffffff;
+
+  /* Bordes / overlays */
+  --border:                  rgba(229, 0, 130, 0.35);
+  --ring:                    rgba(229, 0, 130, 0.45);
+  --overlay:                 rgba(26, 10, 17, 0.75);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(229, 0, 130, 0.25);
+  --shadow-sm:               0 2px 12px rgba(229, 0, 130, 0.18);
+  --shadow-lg:               0 12px 48px rgba(229, 0, 130, 0.3);
+  --shadow-secondary:        0 4px 20px rgba(122, 0, 58, 0.3);
+
+  /* Cards */
+  --card-stroke:             rgba(229, 0, 130, 0.15);
+  --card-stroke-strong:      rgba(229, 0, 130, 0.3);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #e50082 6%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #e50082 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #e50082 10%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #e50082 15%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 50%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 25%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #86efac;
+  --warning:                 #fde047;
+  --danger:                  #f87171;
+}
+
+
+/* ====== ROSE LAVENDER VARIANT ====== */
+body.scheme-rose-lavender,
+.component-scheme-rose-lavender {
+  /* Superficies - base lavanda oscura */
+  --surface:                 #24182c;
+  --surface-2:               #2f1d3a;
+  --surface-muted:           #3b2448;
+  --surface-border:          #b383c9;
+  --surface-overlay:         rgba(179, 131, 201, 0.25);
+
+  /* Texto - lavanda pálido */
+  --text:                    #f4ecf9;
+  --text-muted:              #d3bfdc;
+  --text-inverse:            #24182c;
+  --heading-color:           #e6b4f4;
+
+  /* Acento principal - rosa vibrante */
+  --accent:                  #f472b6; /* rosa brillante */
+  --accent-hover:            #ec4899;
+  --accent-active:           color-mix(in oklab, #f472b6, white 12%);
+  --accent-muted:            #9d4d6b;
+  --accent-contrast:         #24182c;
+
+  /* Acento secundario - morado lavanda */
+  --accent-secondary:        #a78bfa; /* violeta pastel */
+  --accent-secondary-hover:  #c4b5fd;
+  --accent-secondary-active: color-mix(in oklab, #a78bfa, white 10%);
+  --accent-secondary-muted:  #6d549c;
+  --accent-secondary-contrast: #24182c;
+
+  /* Bordes / overlays */
+  --border:                  rgba(164, 126, 192, 0.25);
+  --ring:                    rgba(164, 126, 192, 0.35);
+  --overlay:                 rgba(36, 24, 44, 0.65);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(164, 126, 192, 0.2);
+  --shadow-sm:               0 2px 12px rgba(164, 126, 192, 0.15);
+  --shadow-lg:               0 12px 48px rgba(164, 126, 192, 0.25);
+  --shadow-secondary:        0 4px 20px rgba(244, 114, 182, 0.2);
+
+  /* Cards */
+  --card-stroke:             rgba(164, 126, 192, 0.15);
+  --card-stroke-strong:      rgba(164, 126, 192, 0.25);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 15%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #a78bfa 4%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #a78bfa 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #a78bfa 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #a78bfa 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 45%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 20%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #86efac; /* verde suave */
+  --warning:                 #fde68a; /* amarillo pastel */
+  --danger:                  #fca5a5; /* rojo rosado */
+}
+
+ /* ====== AMETHYST ROMANCE VARIANT ====== */
+body.scheme-amethyst-romance,
+.component-scheme-amethyst-romance {
+  /* Superficies (medio-claras, no blancas) */
+  --surface:                 #f1e9f6;   /* lavanda crema */
+  --surface-2:               #ebe1f2;   /* capa sutil */
+  --surface-muted:           #e3d6ee;   /* secciones/grids */
+  --surface-border:          #ceb6e6;   /* bordes visibles pero suaves */
+  --surface-overlay:         rgba(116, 87, 150, 0.10);
+
+  /* Texto (suave, sin negro puro) */
+  --text:                    #3c2d4b;   /* violeta grisáceo */
+  --text-muted:              #6f5b85;   /* para párrafos secundarios */
+  --text-inverse:            #ffffff;
+  --heading-color:           #6b4ab3;  /* violeta medio para títulos */
+
+  /* Acentos (lila contenido, menos chillón) */
+  --accent:                  #a789f5;  /* lila moderado */
+  --accent-hover:            #9774f0;
+  --accent-active:           color-mix(in oklab, #a789f5, black 10%);
+  --accent-muted:            #d7c8fb;
+  --accent-contrast:         #ffffff;
+
+  /* Secundario (vino suavizado para no romper contraste) */
+  --accent-secondary:        #8b3e65;  /* vino rosado medio */
+  --accent-secondary-hover:  #7a3457;
+  --accent-secondary-active: color-mix(in oklab, #8b3e65, black 8%);
+  --accent-secondary-muted:  #d8a9bf;
+  --accent-secondary-contrast:#ffffff;
+
+  /* Bordes / focus */
+  --border:                  rgba(110, 84, 147, 0.28);
+  --ring:                    rgba(151, 116, 240, 0.45);
+  --overlay:                 rgba(47, 33, 67, 0.35);
+
+  /* Sombras (más neutras) */
+  --shadow:                  0 6px 24px rgba(54, 38, 77, 0.12);
+  --shadow-sm:               0 2px 12px rgba(54, 38, 77, 0.10);
+  --shadow-lg:               0 18px 60px rgba(54, 38, 77, 0.18);
+
+  /* Cards y “glass” */
+  --card-stroke:             rgba(110, 84, 147, 0.16);
+  --card-stroke-strong:      rgba(110, 84, 147, 0.28);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+
+  /* Formularios (mayor legibilidad sobre superficies medias) */
+  --field-bg:                color-mix(in oklab, var(--surface), #a789f5 5%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #a789f5 10%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #a789f5 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #a789f5 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 42%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 18%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 52%);
+
+  /* Estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #8bd3a6;  /* verdes/lilas apagados */
+  --warning:                 #f6d58a;
+  --danger:                  #ee9aa6;
+}
+
+
+  /* ====== BLUSH PEONY VARIANT ====== */
+body.scheme-blush-peony,
+.component-scheme-blush-peony {
+  /* Superficies */
+  --surface:                 #fff8f9;   /* crema rosada */
+  --surface-2:               #fff0f4;   /* rosita suave */
+  --surface-muted:           #ffe6ec;   /* rosado pastel */
+  --surface-border:          #f7cad0;
+  --surface-overlay:         rgba(247, 202, 208, 0.25);
+
+  /* Texto */
+  --text:                    #4a1f2f;
+  --text-muted:              #7a475c;
+  --text-inverse:            #ffffff;
+  --heading-color:           #c7155c; /* rosa peonía */
+
+  /* Acentos */
+  --accent:                  #f38ca4;
+  --accent-hover:            #f06c89;
+  --accent-active:           color-mix(in oklab, #f38ca4, black 12%);
+  --accent-muted:            #f7cad0;
+  --accent-contrast:         #ffffff;
+
+  /* Secundario - coral */
+  --accent-secondary:        #f9a08c;
+  --accent-secondary-hover:  #f77f64;
+  --accent-secondary-active: color-mix(in oklab, #f9a08c, black 10%);
+  --accent-secondary-muted:  #ffd6cc;
+  --accent-secondary-contrast: #4a1f2f;
+
+  /* Bordes / overlays */
+  --border:                  rgba(243, 140, 164, 0.25);
+  --ring:                    rgba(243, 140, 164, 0.35);
+  --overlay:                 rgba(74, 31, 47, 0.5);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(243, 140, 164, 0.2);
+  --shadow-sm:               0 2px 12px rgba(243, 140, 164, 0.15);
+  --shadow-lg:               0 12px 48px rgba(243, 140, 164, 0.25);
+
+  /* Cards y formularios */
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+  --field-bg:                color-mix(in oklab, var(--surface), #f38ca4 3%);
+  --field-border:            color-mix(in oklab, var(--border), #f38ca4 8%);
+}
+
+ 
+/* ====== EMERALD ROMANCE VARIANT ====== */
+body.scheme-emerald-romance,
+.component-scheme-emerald-romance {
+  /* Superficies */
+  --surface:                 #eef8f3;   /* verde menta pálido */
+  --surface-2:               #e2f1ea;   /* tono intermedio */
+  --surface-muted:           #d6e9e1;   /* bloque sutil */
+  --surface-border:          #a3d6c0;   /* bordes suaves */
+  --surface-overlay:         rgba(163, 214, 192, 0.18);
+
+  /* Texto */
+  --text:                    #1f2d28;   /* verde grisáceo oscuro */
+  --text-muted:              #557064;   /* apagado, buena legibilidad */
+  --text-inverse:            #ffffff;
+  --heading-color:           #0f766e;   /* verde esmeralda medio */
+
+  /* Acentos (verde esmeralda) */
+  --accent:                  #10b981;   /* esmeralda brillante */
+  --accent-hover:            #059669;
+  --accent-active:           color-mix(in oklab, #10b981, black 10%);
+  --accent-muted:            #a7f3d0;
+  --accent-contrast:         #ffffff;
+
+  /* Acento secundario (verde oliva romántico) */
+  --accent-secondary:        #7c9070;
+  --accent-secondary-hover:  #66765c;
+  --accent-secondary-active: color-mix(in oklab, #7c9070, black 8%);
+  --accent-secondary-muted:  #c9d5be;
+  --accent-secondary-contrast: #1f2d28;
+
+  /* Bordes / overlays */
+  --border:                  rgba(16, 185, 129, 0.25);
+  --ring:                    rgba(16, 185, 129, 0.4);
+  --overlay:                 rgba(20, 45, 36, 0.45);
+
+  /* Sombras */
+  --shadow:                  0 4px 20px rgba(16, 185, 129, 0.18);
+  --shadow-sm:               0 2px 12px rgba(16, 185, 129, 0.12);
+  --shadow-lg:               0 12px 48px rgba(16, 185, 129, 0.25);
+
+  /* Cards */
+  --card-stroke:             rgba(16, 185, 129, 0.15);
+  --card-stroke-strong:      rgba(16, 185, 129, 0.25);
+  --card-bg-glass:           color-mix(in oklab, var(--surface), transparent 10%);
+
+  /* Formularios */
+  --field-bg:                color-mix(in oklab, var(--surface), #10b981 4%);
+  --field-fg:                var(--text);
+  --field-border:            color-mix(in oklab, var(--border), #10b981 8%);
+  --field-bg-hover:          color-mix(in oklab, var(--field-bg), #10b981 6%);
+  --field-bg-focus:          color-mix(in oklab, var(--field-bg), #10b981 10%);
+  --field-placeholder:       color-mix(in oklab, var(--text), transparent 40%);
+  --field-disabled-bg:       color-mix(in oklab, var(--field-bg), transparent 20%);
+  --field-disabled-fg:       color-mix(in oklab, var(--text), transparent 55%);
+
+  /* Links y estados */
+  --link:                    var(--accent);
+  --link-hover:              var(--accent-hover);
+  --success:                 #22c55e;  /* verde brillante */
+  --warning:                 #facc15;  /* amarillo cálido */
+  --danger:                  #ef4444;  /* rojo vivo */
+}
+/* ====== Utilidades opcionales que consumen tokens ====== */
+/* Opcionales de ayuda (por si los usas) */
+.btn-scheme         { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.btn-scheme:hover   { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-ghost          { background: transparent; color: var(--accent); border: 1px solid var(--surface-border); }
+.btn-ghost:hover    { background: var(--accent-muted); }
+
+.card { background: var(--surface-2); color: var(--text); box-shadow: var(--shadow); border: 1px solid var(--card-stroke); }
+.input, .form-control {
+  background: var(--field-bg);
+  color: var(--field-fg);
+  border: 1px solid var(--field-border);
+}
+.input:focus, .form-control:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px var(--ring); }
+.text-muted { color: var(--text-muted) !important; }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+  &:hover { background: var(--surface-muted); }
+}
+
+.badge-chip {
+  background: var(--accent-secondary);
+  color: var(--accent-secondary-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-secondary), black 18%);
+}
+
+.card-glass {
+  background: var(--card-bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-stroke);
+  box-shadow: var(--shadow);
+}
+
+.input {
+  background: var(--field-bg);
+  color: var(--field-fg);
+  border: 1px solid var(--field-border);
+  &::placeholder { color: var(--field-placeholder); }
+  &:hover { background: var(--field-bg-hover); }
+  &:focus { outline: 2px solid var(--ring); background: var(--field-bg-focus); }
+  &:disabled {
+    background: var(--field-disabled-bg);
+    color: var(--field-disabled-fg);
+  }
+}
+
+/* =========================================================
+   NUEVAS CLASES PARA BOTONES CON ACENTO SECUNDARIO
+   ========================================================= */
+
+/* Botón con acento secundario (verde menta) */
+[class*="scheme-"] .btn-secondary-accent {
+  background: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary);
+  color: var(--accent-secondary-contrast);
+  box-shadow: var(--shadow-secondary);
+  transition: all var(--transition-base);
+}
+
+[class*="scheme-"] .btn-secondary-accent:hover {
+  background: var(--accent-secondary-hover);
+  border-color: var(--accent-secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-secondary-lg);
+}
+
+[class*="scheme-"] .btn-secondary-accent:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-secondary-sm);
+}
+
+/* Variante outline del acento secundario */
+[class*="scheme-"] .btn-secondary-accent.btn-outline {
+  background: transparent;
+  color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  box-shadow: none;
+}
+
+[class*="scheme-"] .btn-secondary-accent.btn-outline:hover {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 88%);
+  color: var(--accent-secondary);
+}
+
+/* Variante ghost del acento secundario */
+[class*="scheme-"] .btn-secondary-accent.btn-ghost {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 88%);
+  color: var(--accent-secondary);
+  border-color: transparent;
+}
+
+[class*="scheme-"] .btn-secondary-accent.btn-ghost:hover {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 78%);
+}
+
+/* =========================================================
+   BADGES CON ACENTO SECUNDARIO
+   ========================================================= */
+
+[class*="scheme-"] .badge-secondary-accent {
+  color: var(--accent-secondary);
+  background: color-mix(in oklab, var(--accent-secondary), transparent 88%);
+  border: 1px solid color-mix(in oklab, var(--accent-secondary), transparent 70%);
+}
+
+[class*="scheme-"] .badge-secondary-accent-solid {
+  color: var(--accent-secondary-contrast);
+  background: var(--accent-secondary);
+  border: 1px solid color-mix(in oklab, var(--accent-secondary), black 10%);
+}
+
+/* =========================================================
+   CHIPS/TAGS CON ACENTO SECUNDARIO
+   ========================================================= */
+
+[class*="scheme-"] .tag-secondary-accent {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 90%);
+  color: var(--accent-secondary);
+  border: 1px solid color-mix(in oklab, var(--accent-secondary), transparent 70%);
+}
+
+[class*="scheme-"] .tag-secondary-accent:hover {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 80%);
+}
+
+/* =========================================================
+   ELEMENTOS DE FORMULARIO CON ACENTO SECUNDARIO
+   ========================================================= */
+
+/* Checkboxes y radios con acento secundario */
+[class*="scheme-"] .form-check-input.input-secondary-accent:checked {
+  background-color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+/* Input con foco en acento secundario */
+[class*="scheme-"] .form-control.input-secondary-accent:focus {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent-secondary), transparent 70%);
+}
+
+/* =========================================================
+   CARDS DESTACADAS CON ACENTO SECUNDARIO
+   ========================================================= */
+
+[class*="scheme-"] .card-highlight-secondary {
+  border-left: 4px solid var(--accent-secondary);
+  box-shadow: var(--shadow-secondary);
+}
+
+[class*="scheme-"] .card-highlight-secondary .card-header {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 92%);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent-secondary), transparent 70%);
+}
+
+/* =========================================================
+   PROGRESS BARS CON ACENTO SECUNDARIO
+   ========================================================= */
+
+[class*="scheme-"] .progress-bar-secondary-accent {
+  background: var(--gradient-secondary);
+}
+
+/* =========================================================
+   UTILIDADES DE TEXTO CON ACENTO SECUNDARIO
+   ========================================================= */
+
+[class*="scheme-"] .text-secondary-accent {
+  color: var(--accent-secondary) !important;
+}
+
+[class*="scheme-"] .bg-secondary-accent {
+  background: color-mix(in oklab, var(--accent-secondary), transparent 88%) !important;
+}
+
+/* =========================================================
+   ACTUALIZACIÓN DE CLASES EXISTENTES PARA USO MIXTO
+   ========================================================= */
+
+/* Combinación de acentos en un mismo componente */
+[class*="scheme-"] .btn-group-mixed .btn-scheme {
+  /* Rosa para acciones primarias */
+}
+
+[class*="scheme-"] .btn-group-mixed .btn-secondary-accent {
+  /* Verde para acciones secundarias o de confirmación */
+}
+
+/* Estados con combinación de colores */
+[class*="scheme-"] .status-success {
+  color: var(--accent-secondary);
+  background: color-mix(in oklab, var(--accent-secondary), transparent 92%);
+  border: 1px solid color-mix(in oklab, var(--accent-secondary), transparent 70%);
+}
+
+[class*="scheme-"] .status-alert {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 92%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* =========================================
+   3) SISTEMA DE CLASES PARA TIPOGRAFÍA
+   ========================================= */
+.section-title {
+  color: var(--heading-color);
+  font-size: var(--h2-size);
+  font-weight: var(--heading-weight);
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+.section-title--large {
+  font-size: var(--h1-size);
+}
+
+.section-title--accent {
+  color: var(--heading-accent);
+}
+
+.section-subtitle {
+  color: var(--subtitle-color);
+  font-size: var(--subtitle-size);
+  font-weight: var(--subtitle-weight);
+  line-height: var(--subtitle-line-height);
+}
+
+/* =========================================
+   4) UTILIDADES DE CONTENEDORES
+   ========================================= */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.section-tags {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--badge-radius);
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  border: 1px solid var(--badge-border);
+  transition: background-color var(--transition-fast);
+}
+
+.tag:hover {
+  background: var(--badge-bg-hover);
+}
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   Reglas “skin” genéricas para cualquier .scheme-*
+   ========================================= */
+[class*="scheme-"] {
+  background: var(--surface);
+  color: var(--text);
+
+  /* ---- Bridge a variables Bootstrap globales ---- */
+  --bs-body-bg:       var(--surface);
+  --bs-body-color:    var(--text);
+  --bs-border-color:  var(--border);
+  --bs-emphasis-color:var(--text);
+  --bs-secondary-color:var(--muted);
+}
+
+/* Tipografía - ACTUALIZADO */
+[class*="scheme-"] :is(h1,h2,h3,h4,h5,h6) { 
+  color: var(--heading-color, var(--text)); /* Fallback a --text si --heading-color no existe */
+}
+[class*="scheme-"] p { color: var(--text); }
+[class*="scheme-"] .text-muted,
+[class*="scheme-"] small.text-muted { color: var(--muted) !important; }
+
+/* Links (no botón) */
+/* Links (no botón) */
+[class*="scheme-"] a:not(.btn) {
+  color: var(--accent);
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 70%);
+}
+[class*="scheme-"] a:not(.btn):hover {
+  text-decoration-color: var(--accent);
+}
+
+
+/* Botón utilitario del scheme */
+[class*="scheme-"] .btn-scheme {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .btn-scheme:hover {
+  background: var(--accent-hover, var(--accent));
+  border-color: var(--accent-hover, var(--accent));
+}
+[class*="scheme-"] .btn-scheme.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: none;
+}
+[class*="scheme-"] .btn-scheme.btn-ghost {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* btn-link al color del scheme */
+[class*="scheme-"] .btn-link,
+[class*="scheme-"] .btn.btn-link {
+  color: var(--accent) !important;
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 60%);
+}
+[class*="scheme-"] .btn-link:hover,
+[class*="scheme-"] .btn.btn-link:hover {
+  color: var(--accent-hover, var(--accent)) !important;
+  text-decoration-color: var(--accent-hover, var(--accent));
+}
+
+/* Superficies Bootstrap comunes */
+[class*="scheme-"] :is(.card,.modal-content,.offcanvas,.dropdown-menu,.list-group-item) {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Placeholders */
+[class*="scheme-"] ::placeholder {
+  color: color-mix(in oklab, var(--muted), transparent 20%) !important;
+}
+
+/* Campos base */
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea) {
+  color: var(--text);
+  background: color-mix(in oklab, var(--surface-2, var(--surface)), transparent 10%);
+  border: 1px solid var(--border);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea):hover {
+  background: color-mix(in oklab, var(--surface-2, var(--surface)), transparent 6%);
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea):focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+  outline: none;
+  background: color-mix(in oklab, var(--surface-2, var(--surface)), transparent 2%);
+}
+
+/* Input group */
+[class*="scheme-"] .input-group-text {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Checks, radios y switches */
+[class*="scheme-"] .form-check-input {
+  background-color: color-mix(in oklab, var(--surface-2), transparent 0%);
+  border-color: var(--border);
+}
+[class*="scheme-"] .form-check-input:focus {
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+  border-color: var(--accent);
+}
+[class*="scheme-"] .form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+[class*="scheme-"] .form-switch .form-check-input:checked {
+  background-color: var(--accent);
+}
+
+/* Estado disabled */
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input):disabled,
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input)[readonly] {
+  opacity: .7;
+  background: color-mix(in oklab, var(--surface-2), transparent 10%);
+}
+
+/* Helpers de feedback */
+[class*="scheme-"] .is-valid   { border-color: color-mix(in oklab, var(--success), var(--border) 60%); }
+[class*="scheme-"] .is-invalid { border-color: color-mix(in oklab, var(--danger),  var(--border) 60%); }
+
+/* =========================================================
+   5) BOTONES AL SCHEME
+   ========================================================= */
+[class*="scheme-"] .btn-scheme {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .btn-scheme:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+[class*="scheme-"] .btn-scheme.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: none;
+}
+[class*="scheme-"] .btn-scheme.btn-ghost {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* Utilidades Bootstrap mapeadas */
+[class*="scheme-"] .btn-primary,
+[class*="scheme-"] .btn-success {
+  background-color: var(--accent);
+  border-color:     var(--accent);
+  color:            var(--accent-contrast);
+}
+[class*="scheme-"] .btn-primary:hover,
+[class*="scheme-"] .btn-success:hover {
+  background-color: var(--accent-hover);
+  border-color:     var(--accent-hover);
+}
+[class*="scheme-"] .btn-outline-secondary {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--text), transparent 60%);
+}
+[class*="scheme-"] .btn-outline-secondary:hover {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--text);
+}
+
+/* Warning mapeado (RSVP) */
+[class*="scheme-"] .btn-warning {
+  background-color: var(--accent-warning);
+  border-color:     var(--accent-warning);
+  color:            var(--warning-contrast);
+}
+[class*="scheme-"] .btn-warning:hover {
+  background-color: color-mix(in oklab, var(--accent-warning), black 10%);
+  border-color:     color-mix(in oklab, var(--accent-warning), black 10%);
+}
+
+/* =========================================================
+   6) BADGES (variantes neutra/soft/acento inverso)
+   ========================================================= */
+[class*="scheme-"] .badge { /* neutra por defecto */
+  color: var(--text);
+  background: color-mix(in oklab, var(--surface-2), transparent 0%);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 10%);
+}
+[class*="scheme-"] .badge-soft-accent { /* soft rosa */
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+[class*="scheme-"] .badge-contrast { /* para texto sobre imagen */
+  color: var(--accent-contrast);
+  background: color-mix(in oklab, #000, transparent 50%);
+  border: 1px solid color-mix(in oklab, #fff, transparent 75%);
+}
+[class*="scheme-"] .badge-accent { /* sólida de acento */
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent), black 10%);
+}
+
+/* =========================================================
+   7) SUPERFICIES COMUNES (cards, modales, listas…)
+   ========================================================= */
+[class*="scheme-"] :is(.card,.modal-content,.offcanvas,.dropdown-menu,.list-group-item) {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+[class*="scheme-"] hr { border-color: var(--border); opacity: 1; }
+[class*="scheme-"] .border-scheme { border-color: var(--border) !important; }
+[class*="scheme-"] .ring-scheme { box-shadow: 0 0 0 4px var(--ring); }
+
+/* Dropdown/list active */
+[class*="scheme-"] .dropdown-item:hover,
+[class*="scheme-"] .dropdown-item:focus,
+[class*="scheme-"] .list-group-item-action:hover,
+[class*="scheme-"] .list-group-item-action:focus {
+  background: color-mix(in oklab, var(--accent), transparent 92%);
+  color: var(--text);
+}
+[class*="scheme-"] .list-group-item.active,
+[class*="scheme-"] .dropdown-item.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+/* Tablas */
+[class*="scheme-"] .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+}
+[class*="scheme-"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-bg-type: color-mix(in oklab, var(--surface-2), transparent 70%);
+}
+
+/* Selección */
+[class*="scheme-"] ::selection {
+  background: color-mix(in oklab, var(--accent), transparent 70%);
+  color: var(--text);
+}
+
+/* Extras reutilizables */
+[class*="scheme-"] .glassy {
+  background: color-mix(in oklab, var(--surface), transparent 30%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 25%);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+/* Chips específicos */
+[class*="scheme-"] .tag,
+[class*="scheme-"] .chip-soft-accent {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Toast “neutro” */
+[class*="scheme-"] .toast-scheme {
+  background: var(--surface-overlay);
+  color: var(--accent-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-contrast), transparent 70%);
+  box-shadow: var(--shadow);
+}
+
+/* GLightbox */
+[class*="scheme-"] .glightbox-container .gslide-description,
+[class*="scheme-"] .glightbox-container .gdesc-inner,
+[class*="scheme-"] .glightbox-container .gslide-title { color: var(--text); }
+[class*="scheme-"] .glightbox-container :is(.gclose,.gnext,.gprev) {
+  color: var(--accent);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Body / html de seguridad */
+body[class*="scheme-"], html[class*="scheme-"] {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Afinado extra para dark (cards “glass” por defecto) */
+.scheme-dark,
+.scheme-rose-dark {
+  --card-stroke:        rgba(255,255,255,.16);
+  --card-stroke-strong: rgba(255,255,255,.28);
+  --card-bg-glass:      color-mix(in oklab, var(--surface), transparent 12%);
+}
+
+/* Elementos sutiles */
+[class*="scheme-"] hr { border-color: var(--border); opacity: 1; }
+[class*="scheme-"] .border-scheme { border-color: var(--border) !important; }
+[class*="scheme-"] .ring-scheme { box-shadow: 0 0 0 4px var(--ring); }
+
+/* Cerrar modal legible en dark */
+[class*="scheme-"] .btn-close {
+  filter: invert(1) grayscale(100%);
+  opacity: .75;
+}
+[class*="scheme-"] .btn-close:hover { opacity: 1; }
+
+/* Badges “neutras” */
+[class*="scheme-"] .badge {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 85%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Formularios */
+[class*="scheme-"] ::placeholder {
+  color: color-mix(in oklab, var(--muted), transparent 20%) !important;
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input) {
+  color: var(--text);
+  background: color-mix(in oklab, var(--surface-2), transparent 10%);
+  border-color: var(--border);
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input):focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Dropdown items / list group active */
+[class*="scheme-"] .dropdown-item:hover,
+[class*="scheme-"] .dropdown-item:focus,
+[class*="scheme-"] .list-group-item-action:hover,
+[class*="scheme-"] .list-group-item-action:focus {
+  background: color-mix(in oklab, var(--accent), transparent 92%);
+  color: var(--text);
+}
+[class*="scheme-"] .list-group-item.active,
+[class*="scheme-"] .dropdown-item.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+/* Tables (suaves y legibles) */
+[class*="scheme-"] .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+}
+[class*="scheme-"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-bg-type: color-mix(in oklab, var(--surface-2), transparent 70%);
+}
+
+/* Selection del navegador al acento */
+[class*="scheme-"] ::selection {
+  background: color-mix(in oklab, var(--accent), transparent 70%);
+  color: var(--text);
+}
+
+/* =========================================
+   Extensiones scheme para SectionAccomodation
+   ========================================= */
+
+/* Swiper (flechas, bullets) */
+[class*="scheme-"] .swiper-button-prev,
+[class*="scheme-"] .swiper-button-next {
+  color: var(--accent);
+  --swiper-navigation-size: 28px;
+  filter: drop-shadow(0 6px 16px var(--overlay));
+}
+[class*="scheme-"] .swiper-button-disabled { opacity: .35 !important; }
+
+[class*="scheme-"] .swiper-pagination-bullet {
+  background: color-mix(in oklab, var(--accent), transparent 60%);
+  opacity: 1;
+}
+[class*="scheme-"] .swiper-pagination-bullet-active {
+  background: var(--accent);
+}
+
+/* Tarjetas “glassy” y sombras */
+[class*="scheme-"] .glassy {
+  background: color-mix(in oklab, var(--surface), transparent 30%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 25%);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+/* Badges sobre imágenes (precio/distancia) */
+[class*="scheme-"] .price-badge {
+  background: var(--overlay);
+  color: var(--accent-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-contrast), transparent 70%);
+}
+[class*="scheme-"] .distance-badge {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Estrellas de rating */
+[class*="scheme-"] .hotel-rating .bi-star-fill,
+[class*="scheme-"] .hotel-rating .bi-star-half,
+[class*="scheme-"] .hotel-rating .bi-star {
+  color: var(--accent);
+}
+
+/* Amenities */
+[class*="scheme-"] .amenities .amenity-label {
+  color: var(--text);
+  opacity: .85;
+}
+[class*="scheme-"] .amenities .bi { color: var(--accent); }
+
+/* Tipos */
+[class*="scheme-"] .accomodation-title { color: var(--text); }
+[class*="scheme-"] .accomodation-intro,
+[class*="scheme-"] .hotel-address { color: var(--muted) !important; }
+
+/* Botones de acción locales */
+[class*="scheme-"] .button-1 {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .button-1:hover {
+  background: var(--accent-hover, var(--accent));
+  border-color: var(--accent-hover, var(--accent));
+}
+
+[class*="scheme-"] .button-2 {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+[class*="scheme-"] .button-2:hover {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  border-color: var(--accent);
+}
+
+/* Botón fantasma genérico (por si lo usas aquí también) */
+[class*="scheme-"] .btn-scheme.btn-ghost {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* Modal del mapa: neutraliza hardcodes 'bg-dark text-white' */
+[class*="scheme-"] .modal-content.bg-dark {
+  background: var(--surface-2) !important;
+}
+[class*="scheme-"] .modal-content.text-white {
+  color: var(--text) !important;
+}
+/* Cerrar modal visible en dark */
+[class*="scheme-"] .btn-close,
+[class*="scheme-"] .btn-close-white {
+  filter: invert(1) grayscale(100%);
+  opacity: .75;
+}
+[class*="scheme-"] .btn-close:hover,
+[class*="scheme-"] .btn-close-white:hover { opacity: 1; }
+
+/* Bordes y separadores dentro de cards */
+[class*="scheme-"] .hotel-card {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid color-mix(in oklab, var(--border), transparent 25%);
+}
+
+/* Helper: chips/badges suaves de acento (reutilizable) */
+[class*="scheme-"] .badge-soft-accent {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Text utilities que usa RSVP */
+[class*="scheme-"] .text-secondary { color: var(--muted) !important; }
+[class*="scheme-"] .text-bg-light {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border);
+}
+
+/* Fondos Bootstrap usados en chips de extras */
+[class*="scheme-"] .bg-body        { background-color: var(--surface)   !important; color: var(--text) !important; }
+[class*="scheme-"] .bg-body-tertiary{ background-color: var(--surface-2) !important; color: var(--text) !important; }
+
+/* Inputs del input-group */
+[class*="scheme-"] .input-group-text {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Botones Bootstrap usados en RSVP */
+[class*="scheme-"] .btn-primary,
+[class*="scheme-"] .btn-success {
+  background-color: var(--accent);
+  border-color:     var(--accent);
+  color:            var(--accent-contrast);
+}
+[class*="scheme-"] .btn-primary:hover,
+[class*="scheme-"] .btn-success:hover {
+  background-color: var(--accent-hover);
+  border-color:     var(--accent-hover);
+}
+
+[class*="scheme-"] .btn-outline-secondary {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--text), transparent 60%);
+}
+[class*="scheme-"] .btn-outline-secondary:hover {
+  background-color: var(--accent-muted);
+  color: var(--text);
+}
+
+/* Botón warning (Avisar) */
+[class*="scheme-"] .btn-warning {
+  background-color: var(--accent-warning);
+  border-color:     var(--accent-warning);
+  color:            var(--warning-contrast);
+}
+[class*="scheme-"] .btn-warning:hover {
+  background-color: color-mix(in oklab, var(--accent-warning), black 10%);
+  border-color:     color-mix(in oklab, var(--accent-warning), black 10%);
+}
+
+/* Alerts del resultado */
+[class*="scheme-"] .alert { border-color: var(--border); }
+[class*="scheme-"] .alert-success {
+  background-color: var(--success-bg);
+  color:            var(--success-text);
+}
+[class*="scheme-"] .alert-danger {
+  background-color: var(--danger-bg);
+  color:            var(--danger-text);
+}
+[class*="scheme-"] .alert-warning {
+  background-color: var(--warning-bg);
+  color:            var(--warning-text);
+}
+
+/* Mapear utilidades que rompen en dark */
+[class*="scheme-"] .text-secondary { color: var(--muted) !important; }
+
+/* btn-light de Bootstrap → tonos del scheme */
+[class*="scheme-"] .btn-light {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+[class*="scheme-"] .btn-light:hover {
+  background-color: color-mix(in oklab, var(--accent), transparent 90%) !important;
+  border-color: var(--border) !important;
+}
+
+/* Variante genérica para botones “solo icono” (si los usas en más secciones) */
+[class*="scheme-"] .btn-icon-only {
+  background: color-mix(in oklab, var(--surface-2), transparent 0%);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+[class*="scheme-"] .btn-icon-only:hover {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .btn-icon-only i { color: var(--accent); }
+
+
+/* Botón redondo genérico de icono (reutilizable) */
+[class*="scheme-"] .icon-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+[class*="scheme-"] .icon-btn:hover,
+[class*="scheme-"] .icon-btn:focus {
+  background: color-mix(in oklab, var(--accent), transparent 90%);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .icon-btn i { color: var(--accent); }
+
+/* Chips / tags suaves con acento (helper reutilizable) */
+[class*="scheme-"] .tag,
+[class*="scheme-"] .chip-soft-accent {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Toast oscuro “neutro” que respeta el scheme */
+[class*="scheme-"] .toast-scheme {
+  background: var(--overlay);
+  color: var(--accent-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-contrast), transparent 70%);
+  box-shadow: var(--shadow);
+}
+
+/* GLightbox básico para dark/rose-dark */
+[class*="scheme-"] .glightbox-container .gslide-description,
+[class*="scheme-"] .glightbox-container .gdesc-inner,
+[class*="scheme-"] .glightbox-container .gslide-title {
+  color: var(--text);
+}
+[class*="scheme-"] .glightbox-container .gclose,
+[class*="scheme-"] .glightbox-container .gnext,
+[class*="scheme-"] .glightbox-container .gprev {
+  color: var(--accent);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* ===================================================
+   3) MAPEO GLOBAL DE CONTROLES A LOS NUEVOS TOKENS
+   =================================================== */
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea){
+  color:            var(--field-fg);
+  background:       var(--field-bg);
+  border: 1px solid var(--field-border);
+  caret-color:      var(--accent);
+  transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+  background-clip: padding-box;
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea):hover{
+  background: var(--field-bg-hover);
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea):focus{
+  background:  var(--field-bg-focus);
+  border-color:var(--accent);
+  box-shadow:  0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+  outline: none;
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-textarea)::placeholder{
+  color: var(--field-placeholder) !important;
+  opacity: 1;
+}
+[class*="scheme-"] :is(.form-control,.form-select)[disabled],
+[class*="scheme-"] :is(.form-control,.form-select)[readonly]{
+  background: var(--field-disabled-bg);
+  color:      var(--field-disabled-fg);
+}
+
+/* Input group “addon” */
+[class*="scheme-"] .input-group-text{
+  background: var(--field-bg);
+  color:      var(--field-fg);
+  border-color: var(--field-border);
+}
+
+/* Checks/radios/switches */
+[class*="scheme-"] .form-check-input{
+  background-color: var(--field-bg);
+  border-color:     var(--field-border);
+}
+[class*="scheme-"] .form-check-input:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+}
+[class*="scheme-"] .form-check-input:checked{
+  background-color: var(--accent);
+  border-color:     var(--accent);
+}
+
+/* Autofill (Chrome/WebKit) – conserva contraste del field */
+[class*="scheme-"] input.form-control:-webkit-autofill,
+[class*="scheme-"] textarea.form-control:-webkit-autofill{
+  -webkit-text-fill-color: var(--field-fg);
+  box-shadow: 0 0 0px 1000px var(--field-bg) inset;
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+}
+
+
+/* Asegura fondo y texto del body */
+body[class*="scheme-"] {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Asegura que html también reciba fondo si se desea usar ahí */
+html[class*="scheme-"] {
+  background: var(--surface);
+  color: var(--text);
+}
+
+
+
+.scheme-dark,
+.scheme-rose-dark {
+  --card-stroke:        rgba(255,255,255,.16);
+  --card-stroke-strong: rgba(255,255,255,.28);
+  --card-bg-glass:      color-mix(in oklab, var(--surface), transparent 12%);
+}
+
+:global(.scheme-rose-dark) .section-ceremony-min .card,
+.section-ceremony-min.scheme-rose-dark .card {
+  --bs-card-bg:      color-mix(in oklab, var(--surface), transparent 6%);
+  --bs-border-color: color-mix(in oklab, var(--border), transparent 0%);
+  
+  .card-body {
+    /* En modo oscuro, usamos un contraste más suave pero efectivo */
+    background: 
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--surface-border), transparent 90%) 0%,
+        color-mix(in oklab, var(--surface-border), transparent 94%) 20%,
+        color-mix(in oklab, var(--surface-border), transparent 96%) 50%,
+        color-mix(in oklab, var(--surface-border), transparent 94%) 80%,
+        color-mix(in oklab, var(--surface-border), transparent 90%) 100%
+      );
+  }
+}
+
+/* Para el esquema claro, más contraste */
+:global(.scheme-rose) .section-ceremony-min .card,
+.section-ceremony-min.scheme-rose .card {
+  .card-body {
+    background: 
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--surface-border), transparent 80%) 0%,
+        color-mix(in oklab, var(--surface-border), transparent 88%) 20%,
+        color-mix(in oklab, var(--surface-border), transparent 90%) 50%,
+        color-mix(in oklab, var(--surface-border), transparent 88%) 80%,
+        color-mix(in oklab, var(--surface-border), transparent 80%) 100%
+      );
+  }
+}
+
+
+/* Mejoras específicas para modo oscuro */
+:global(.scheme-rose-dark) .section-ceremony-min .card,
+.section-ceremony-min.scheme-rose-dark .card {
+  background: color-mix(in oklab, var(--surface), var(--surface-2) 2%);
+  border-color: color-mix(in oklab, var(--border), transparent 10%);
+  
+  .content-section {
+    background: 
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--surface), var(--surface-2) 2%) 0%,
+        color-mix(in oklab, var(--surface-2), var(--surface-2) 1%) 50%,
+        color-mix(in oklab, var(--surface), var(--surface-2) 1.5%) 100%
+      );
+  }
+}
+
+/* Mejoras para modo claro */
+:global(.scheme-rose) .section-ceremony-min .card,
+.section-ceremony-min.scheme-rose .card {
+  .content-section {
+    background: 
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--surface), var(--surface-2) 12%) 0%,
+        color-mix(in oklab, var(--surface-2), var(--surface-2) 8%) 50%,
+        color-mix(in oklab, var(--surface), var(--surface-2) 10%) 100%
+      );
+  }
+}
+
+ 
+
+

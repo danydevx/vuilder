@@ -1,0 +1,542 @@
+/* =========================================
+   Design Tokens base (scope global)
+   ========================================= */
+:root {
+  /* Semánticos */
+  --surface:        #ffffff;
+  --surface-2:      #f6f7f9;
+  --text:           #111111;
+  --muted:          #6b7280;
+  --accent:         #0ea5e9; /* cyan */
+  --accent-contrast:#ffffff;
+  --border:         rgba(17,17,17,.12);
+  --overlay:        rgba(0,0,0,.35);
+  --shape-fill:     #ffffff;
+  --ring:           #ffffff; /* bordes “ring” (avatares/fotos) */
+  --shadow:         0 8px 30px rgba(0,0,0,.12);
+
+    /* Derivados del acento */
+  --accent-hover:  color-mix(in oklab, var(--accent), black 12%);
+  --accent-active: color-mix(in oklab, var(--accent), black 20%);
+  --accent-muted:  color-mix(in oklab, var(--accent), transparent 88%);
+
+  /* Alias/compatibilidad */
+  --text-muted: var(--muted);
+  --text-secondary: var(--muted);
+  --surface-light: color-mix(in oklab, var(--surface), white 6%);
+
+  /* Estados (para alerts/botones warning, etc.) */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger:  #ef4444;
+
+  /* Contrastes y fondos suaves para alerts */
+  --success-bg:  color-mix(in oklab, var(--success), var(--surface) 86%);
+  --success-text: color-mix(in oklab, var(--success), var(--text) 35%);
+  --warning-bg:  color-mix(in oklab, var(--warning), var(--surface) 86%);
+  --warning-text: color-mix(in oklab, var(--warning), var(--text) 25%);
+  --danger-bg:   color-mix(in oklab, var(--danger),  var(--surface) 88%);
+  --danger-text:  color-mix(in oklab, var(--danger),  var(--text) 35%);
+
+  /* Para .btn-warning usado en RSVP */
+  --accent-warning: var(--warning);
+  --warning-contrast: #111111;
+}
+
+/* =========================================
+   Esquemas: solo redefinen variables
+   ========================================= */
+.scheme-light {
+  --surface:        #ffffff;
+  --surface-2:      #f5f7fb;
+  --text:           #0b1220;
+  --muted:          #637083;
+  --accent:         #0ea5e9;
+  --accent-contrast:#ffffff;
+  --border:         rgba(11,18,32,.12);
+  --overlay:        rgba(0,0,0,.35);
+  --shape-fill:     #ffffff;
+  --ring:           #ffffff;
+  --shadow:         0 10px 28px rgba(2,6,23,.10);
+}
+
+.scheme-dark {
+  --surface:        #0b1220;
+  --surface-2:      #0f172a;
+  --text:           #e5e7eb;
+  --muted:          #94a3b8;
+  --accent:         #22d3ee; /* cyan claro */
+  --accent-contrast:#0b1220;
+  --border:         rgba(229,231,235,.14);
+  --overlay:        rgba(0,0,0,.45);
+  --shape-fill:     #0b1220;
+  --ring:           #0b1220;
+  --shadow:         0 12px 36px rgba(0,0,0,.45);
+}
+
+.scheme-rose { /* romántico/bodas */
+  --surface:        #fffafc;
+  --surface-2:      #fff5f7;
+  --text:           #402b2f;
+  --muted:          #8b6f74;
+  --accent:         #e11d48; /* rose-600 */
+  --accent-contrast:#ffffff;
+  --border:         rgba(64,43,47,.12);
+  --overlay:        rgba(64,43,47,.28);
+  --shape-fill:     #fff5f7;
+  --ring:           #ffffff;
+  --shadow:         0 10px 28px rgba(225,29,72,.18);
+}
+
+.scheme-rose-dark {
+  --surface:        #1c0c12;
+  --surface-2:      #2a1119;
+  --text:           #fde7ee;
+  --muted:          #f6c7d4;
+  --accent:         #e11d48;
+  --accent-contrast:#1c0c12;
+  --border:         rgba(255,255,255,.16);
+  --overlay:        rgba(0,0,0,.50);
+  --shape-fill:     #2a1119;
+  --ring:           #1c0c12;
+  --shadow:         0 16px 44px rgba(225,29,72,.28);
+  --accent-weak:    #fce7ee;
+  --accent-hover:   #be123c;
+  --accent-active:  #9f1239;
+}
+
+ 
+
+/* =========================================
+   Reglas “skin” genéricas para cualquier .scheme-*
+   ========================================= */
+/* =============================
+   Skin base para cualquier .scheme-*
+   ============================= */
+[class*="scheme-"] {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Tipografía */
+[class*="scheme-"] :is(h1,h2,h3,h4,h5,h6) { color: var(--text); }
+[class*="scheme-"] :is(p,.text-muted) { color: var(--muted) !important; }
+
+/* Links (no botón) */
+[class*="scheme-"] a:not(.btn) {
+  color: var(--accent);
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 70%);
+}
+[class*="scheme-"] a:not(.btn):hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Botón utilitario del scheme */
+[class*="scheme-"] .btn-scheme {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .btn-scheme:hover {
+  background: var(--accent-hover, var(--accent));
+  border-color: var(--accent-hover, var(--accent));
+}
+[class*="scheme-"] .btn-scheme.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: none;
+}
+[class*="scheme-"] .btn-scheme.btn-ghost {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* btn-link al color del scheme */
+[class*="scheme-"] .btn-link,
+[class*="scheme-"] .btn.btn-link {
+  color: var(--accent) !important;
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 60%);
+}
+[class*="scheme-"] .btn-link:hover,
+[class*="scheme-"] .btn.btn-link:hover {
+  color: var(--accent-hover, var(--accent)) !important;
+  text-decoration-color: var(--accent-hover, var(--accent));
+}
+
+/* Superficies Bootstrap comunes */
+[class*="scheme-"] :is(.card,.modal-content,.offcanvas,.dropdown-menu,.list-group-item) {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Elementos sutiles */
+[class*="scheme-"] hr { border-color: var(--border); opacity: 1; }
+[class*="scheme-"] .border-scheme { border-color: var(--border) !important; }
+[class*="scheme-"] .ring-scheme { box-shadow: 0 0 0 4px var(--ring); }
+
+/* Cerrar modal legible en dark */
+[class*="scheme-"] .btn-close {
+  filter: invert(1) grayscale(100%);
+  opacity: .75;
+}
+[class*="scheme-"] .btn-close:hover { opacity: 1; }
+
+/* Badges “neutras” */
+[class*="scheme-"] .badge {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 85%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Formularios */
+[class*="scheme-"] ::placeholder {
+  color: color-mix(in oklab, var(--muted), transparent 20%) !important;
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input) {
+  color: var(--text);
+  background: color-mix(in oklab, var(--surface-2), transparent 10%);
+  border-color: var(--border);
+}
+[class*="scheme-"] :is(.form-control,.form-select,.form-check-input):focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Dropdown items / list group active */
+[class*="scheme-"] .dropdown-item:hover,
+[class*="scheme-"] .dropdown-item:focus,
+[class*="scheme-"] .list-group-item-action:hover,
+[class*="scheme-"] .list-group-item-action:focus {
+  background: color-mix(in oklab, var(--accent), transparent 92%);
+  color: var(--text);
+}
+[class*="scheme-"] .list-group-item.active,
+[class*="scheme-"] .dropdown-item.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+/* Tables (suaves y legibles) */
+[class*="scheme-"] .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+}
+[class*="scheme-"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-bg-type: color-mix(in oklab, var(--surface-2), transparent 70%);
+}
+
+/* Selection del navegador al acento */
+[class*="scheme-"] ::selection {
+  background: color-mix(in oklab, var(--accent), transparent 70%);
+  color: var(--text);
+}
+
+/* =========================================
+   Extensiones scheme para SectionAccomodation
+   ========================================= */
+
+/* Swiper (flechas, bullets) */
+[class*="scheme-"] .swiper-button-prev,
+[class*="scheme-"] .swiper-button-next {
+  color: var(--accent);
+  --swiper-navigation-size: 28px;
+  filter: drop-shadow(0 6px 16px var(--overlay));
+}
+[class*="scheme-"] .swiper-button-disabled { opacity: .35 !important; }
+
+[class*="scheme-"] .swiper-pagination-bullet {
+  background: color-mix(in oklab, var(--accent), transparent 60%);
+  opacity: 1;
+}
+[class*="scheme-"] .swiper-pagination-bullet-active {
+  background: var(--accent);
+}
+
+/* Tarjetas “glassy” y sombras */
+[class*="scheme-"] .glassy {
+  background: color-mix(in oklab, var(--surface), transparent 30%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in oklab, var(--border), transparent 25%);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+/* Badges sobre imágenes (precio/distancia) */
+[class*="scheme-"] .price-badge {
+  background: var(--overlay);
+  color: var(--accent-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-contrast), transparent 70%);
+}
+[class*="scheme-"] .distance-badge {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Estrellas de rating */
+[class*="scheme-"] .hotel-rating .bi-star-fill,
+[class*="scheme-"] .hotel-rating .bi-star-half,
+[class*="scheme-"] .hotel-rating .bi-star {
+  color: var(--accent);
+}
+
+/* Amenities */
+[class*="scheme-"] .amenities .amenity-label {
+  color: var(--text);
+  opacity: .85;
+}
+[class*="scheme-"] .amenities .bi { color: var(--accent); }
+
+/* Tipos */
+[class*="scheme-"] .accomodation-title { color: var(--text); }
+[class*="scheme-"] .accomodation-intro,
+[class*="scheme-"] .hotel-address { color: var(--muted) !important; }
+
+/* Botones de acción locales */
+[class*="scheme-"] .button-1 {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .button-1:hover {
+  background: var(--accent-hover, var(--accent));
+  border-color: var(--accent-hover, var(--accent));
+}
+
+[class*="scheme-"] .button-2 {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+[class*="scheme-"] .button-2:hover {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  border-color: var(--accent);
+}
+
+/* Botón fantasma genérico (por si lo usas aquí también) */
+[class*="scheme-"] .btn-scheme.btn-ghost {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+/* Modal del mapa: neutraliza hardcodes 'bg-dark text-white' */
+[class*="scheme-"] .modal-content.bg-dark {
+  background: var(--surface-2) !important;
+}
+[class*="scheme-"] .modal-content.text-white {
+  color: var(--text) !important;
+}
+/* Cerrar modal visible en dark */
+[class*="scheme-"] .btn-close,
+[class*="scheme-"] .btn-close-white {
+  filter: invert(1) grayscale(100%);
+  opacity: .75;
+}
+[class*="scheme-"] .btn-close:hover,
+[class*="scheme-"] .btn-close-white:hover { opacity: 1; }
+
+/* Bordes y separadores dentro de cards */
+[class*="scheme-"] .hotel-card {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid color-mix(in oklab, var(--border), transparent 25%);
+}
+
+/* Helper: chips/badges suaves de acento (reutilizable) */
+[class*="scheme-"] .badge-soft-accent {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Text utilities que usa RSVP */
+[class*="scheme-"] .text-secondary { color: var(--muted) !important; }
+[class*="scheme-"] .text-bg-light {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border);
+}
+
+/* Fondos Bootstrap usados en chips de extras */
+[class*="scheme-"] .bg-body        { background-color: var(--surface)   !important; color: var(--text) !important; }
+[class*="scheme-"] .bg-body-tertiary{ background-color: var(--surface-2) !important; color: var(--text) !important; }
+
+/* Inputs del input-group */
+[class*="scheme-"] .input-group-text {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Botones Bootstrap usados en RSVP */
+[class*="scheme-"] .btn-primary,
+[class*="scheme-"] .btn-success {
+  background-color: var(--accent);
+  border-color:     var(--accent);
+  color:            var(--accent-contrast);
+}
+[class*="scheme-"] .btn-primary:hover,
+[class*="scheme-"] .btn-success:hover {
+  background-color: var(--accent-hover);
+  border-color:     var(--accent-hover);
+}
+
+[class*="scheme-"] .btn-outline-secondary {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--text), transparent 60%);
+}
+[class*="scheme-"] .btn-outline-secondary:hover {
+  background-color: var(--accent-muted);
+  color: var(--text);
+}
+
+/* Botón warning (Avisar) */
+[class*="scheme-"] .btn-warning {
+  background-color: var(--accent-warning);
+  border-color:     var(--accent-warning);
+  color:            var(--warning-contrast);
+}
+[class*="scheme-"] .btn-warning:hover {
+  background-color: color-mix(in oklab, var(--accent-warning), black 10%);
+  border-color:     color-mix(in oklab, var(--accent-warning), black 10%);
+}
+
+/* Alerts del resultado */
+[class*="scheme-"] .alert { border-color: var(--border); }
+[class*="scheme-"] .alert-success {
+  background-color: var(--success-bg);
+  color:            var(--success-text);
+}
+[class*="scheme-"] .alert-danger {
+  background-color: var(--danger-bg);
+  color:            var(--danger-text);
+}
+[class*="scheme-"] .alert-warning {
+  background-color: var(--warning-bg);
+  color:            var(--warning-text);
+}
+
+/* Mapear utilidades que rompen en dark */
+[class*="scheme-"] .text-secondary { color: var(--muted) !important; }
+
+/* btn-light de Bootstrap → tonos del scheme */
+[class*="scheme-"] .btn-light {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+[class*="scheme-"] .btn-light:hover {
+  background-color: color-mix(in oklab, var(--accent), transparent 90%) !important;
+  border-color: var(--border) !important;
+}
+
+/* Variante genérica para botones “solo icono” (si los usas en más secciones) */
+[class*="scheme-"] .btn-icon-only {
+  background: color-mix(in oklab, var(--surface-2), transparent 0%);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+[class*="scheme-"] .btn-icon-only:hover {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .btn-icon-only i { color: var(--accent); }
+
+
+/* Botón redondo genérico de icono (reutilizable) */
+[class*="scheme-"] .icon-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+[class*="scheme-"] .icon-btn:hover,
+[class*="scheme-"] .icon-btn:focus {
+  background: color-mix(in oklab, var(--accent), transparent 90%);
+  box-shadow: var(--shadow);
+}
+[class*="scheme-"] .icon-btn i { color: var(--accent); }
+
+/* Chips / tags suaves con acento (helper reutilizable) */
+[class*="scheme-"] .tag,
+[class*="scheme-"] .chip-soft-accent {
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--accent);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+/* Toast oscuro “neutro” que respeta el scheme */
+[class*="scheme-"] .toast-scheme {
+  background: var(--overlay);
+  color: var(--accent-contrast);
+  border: 1px solid color-mix(in oklab, var(--accent-contrast), transparent 70%);
+  box-shadow: var(--shadow);
+}
+
+/* GLightbox básico para dark/rose-dark */
+[class*="scheme-"] .glightbox-container .gslide-description,
+[class*="scheme-"] .glightbox-container .gdesc-inner,
+[class*="scheme-"] .glightbox-container .gslide-title {
+  color: var(--text);
+}
+[class*="scheme-"] .glightbox-container .gclose,
+[class*="scheme-"] .glightbox-container .gnext,
+[class*="scheme-"] .glightbox-container .gprev {
+  color: var(--accent);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--accent), transparent 70%);
+}
+
+.scheme-dark,
+.scheme-rose-dark {
+  --card-stroke:        rgba(255,255,255,.16);
+  --card-stroke-strong: rgba(255,255,255,.28);
+  --card-bg-glass:      color-mix(in oklab, var(--surface), transparent 12%);
+}
+
+
+body.rose {
+  --surface:           #fff5f7;
+  --surface-light:     #fffafd;
+  --surface-muted:     #ffe4ec;
+  --surface-border:    #f8ccd8;
+  --text:              #5a002e;
+  --text-muted:        #8a4c66;
+  --text-inverse:      #ffffff;
+  --accent:            #e91e63;
+  --accent-hover:      #d81b60;
+  --accent-muted:      #fbb6ce;
+  --shadow:            0 4px 12px rgba(233, 30, 99, 0.15);
+  --surface-overlay: rgba(255, 192, 203, 0.15);
+  --gradient-dark: rgba(255, 105, 180, 0.45);
+  --gradient-light: rgba(255, 182, 193, 0.25);
+}
+
+body.rose-dark {
+  --surface:           #2a0a16;
+  --surface-light:     #3a1020;
+  --surface-muted:     #441a27;
+  --surface-border:    #99334d;
+  --text:              #fce4ec;
+  --text-muted:        #dfa4b4;
+  --text-inverse:      #1c0a0e;
+  --accent:            #ff4081;
+  --accent-hover:      #ff77a9;
+  --accent-muted:      #77223a;
+  --shadow:            0 4px 20px rgba(255, 64, 129, 0.2);
+
+  /* Opcionales para glassmorphism / timeline */
+  --card-stroke:        rgba(255, 255, 255, 0.12);
+  --card-stroke-strong: rgba(255, 255, 255, 0.24);
+  --card-bg-glass:      color-mix(in oklab, var(--surface), transparent 10%);
+    --surface-overlay: rgba(0, 0, 0, 0.35);
+  --gradient-dark: rgba(0, 0, 0, 0.5);
+  --gradient-light: rgba(0, 0, 0, 0.25);
+}

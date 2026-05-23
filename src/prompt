@@ -1,0 +1,730 @@
+Quiero crear una nueva sección para mi Theme Builder de invitaciones y terrazas.
+
+📦 Contexto:
+- Proyecto Vue 3 + Bootstrap 5.3 + Swiper + AOS + Less.
+- Todas las secciones usan props coherentes: 
+  `id`, `scheme`, `title`, `subtitle` o `intro`, `backgroundImg`, `enableOverlay`, `ctas`, y un dataset principal (`services`, `packages`, `gallery`, `faqs`, etc.).
+- Los esquemas de color vienen de clases tipo `component-scheme-[nombre]`, usando variables de mi `scheme.less`.
+
+🎨 Requisitos:
+1. El componente debe exportarse como un archivo Vue (`<template>`, `<script setup>`, `<style lang="less" scoped>`).
+2. Debe usar mi sistema de diseño con variables CSS (`--surface`, `--text`, `--accent`, etc.).
+3. Incluir animaciones suaves con AOS y transiciones modernas.
+4. Usar clases semánticas (`section-[tipo]-[variante]`) y estilos limpios, mobile-first.
+5. Mantener el diseño profesional, elegante y adaptable.
+6. Cada variante debe tener un enfoque visual distinto (por ejemplo: grid, split, timeline, tabs, overlay, gallery, etc.).
+7. Si usa modales, no dependas de Bootstrap JS: usa Vue puro (`v-if` + `<transition>`).
+8. El CSS debe incluir los efectos visuales coherentes (hover, focus, gradient overlays, shadows).
+9. Entregar todo el componente completo y funcional.
+
+🔁 Ahora genera:
+Una nueva sección llamada **Section[NombreTipo][Variante]**, de tipo `[tipo o propósito]` con un diseño `[describe aquí el estilo deseado, ejemplo: hero minimalista, timeline visual, paquetes en cards 3D, galería masonry con lightbox, etc.]`.
+
+Debe integrarse fácilmente en mi vista de pruebas, donde cargo múltiples secciones con diferentes esquemas.
+
+
+
+bien ahora vamos por las demas secciones, ejemplo una section con algunas props que siempre estaran en las secciones, si te das cuenta ambas coinciden en varias props, hasta params que son basicamente en params pasamos otras props, dentro del objeto para mostrar la info en la seccion
+
+hay una muy importante   scheme="rose-dark" esta pasa el scheme que usaremos, basado en una clase previamente en un scheme.less 
+
+
+ <SectionHero
+  id="section-hero-vista-aurora"
+  scheme="rose-dark"
+  title="Terraza Vista Aurora"
+  icon="bi bi-sun"
+  subtitle="Un espacio al aire libre con vistas urbanas, ideal para bodas, XV, cumpleaños y eventos corporativos."
+  body="Ofrecemos un entorno elegante con servicio personalizado y la mejor vista al atardecer."
+  :ctas="[
+    { label: 'Ver paquetes', href: '#section-packages', variant: 'solid', icon: 'bi bi-bag' },
+    { label: 'Galería', href: '#section-gallery', variant: 'outline', icon: 'bi bi-images' }
+  ]"
+  :params="{
+    backgrounds: [
+      { image: 'https://placehold.co/1200x1600/jpg?text=Vista+Aurora+1', title: 'Atardecer en la terraza' },
+      { image: 'https://placehold.co/1200x1600/jpg?text=Vista+Aurora+2', title: 'Montaje de boda' },
+      { image: 'https://placehold.co/1200x1600/jpg?text=Vista+Aurora+3', title: 'Celebración nocturna' }
+    ],
+    texts: [
+      { text1: 'Amplio estacionamiento y área techada.' },
+      { text2: 'Atención personalizada para eventos especiales.' }
+    ]
+  }"
+/>
+
+
+Te paso hero 1 
+
+<template>
+  <section
+    :id="id"
+    class="section section-hero-terrace position-relative overflow-hidden"
+    :class="['component-scheme-' + scheme]"
+  >
+    <!-- Swiper de fondos -->
+    <div class="hero-bg-swiper">
+      <div ref="swiperEl" class="swiper">
+        <div class="swiper-wrapper">
+          <div
+            v-for="(bg, i) in params.backgrounds"
+            :key="i"
+            class="swiper-slide"
+          >
+            <div
+              class="hero-bg-slide"
+              :style="{ backgroundImage: `url('${bg.image}')` }"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container position-relative z-1">
+      <div class="row align-items-end min-vh-100 py-5 gy-4">
+        <!-- Texto -->
+        <div
+          class="col-12 col-md-7"
+          data-aos="fade-up"
+          data-aos-duration="700"
+        >
+          <h1 class="hero-title mb-3">
+            <i v-if="icon" :class="icon" class="me-2"></i>
+            {{ title }}
+          </h1>
+
+          <h4
+            v-if="subtitle"
+            class="hero-subtitle fw-normal text-muted mb-3"
+          >
+            {{ subtitle }}
+          </h4>
+
+          <div
+            v-if="body"
+            class="hero-body text-muted pe-lg-5"
+            v-html="body"
+          ></div>
+        </div>
+
+        <!-- Botones -->
+        <div
+          class="col-12 col-md-5 text-md-end"
+          data-aos="zoom-in"
+          data-aos-duration="700"
+        >
+          <div
+            class="hero-ctas d-flex flex-wrap justify-content-md-end justify-content-center gap-2 mt-3"
+          >
+            <a
+              v-for="(cta, i) in ctas"
+              :key="i"
+              :href="cta.href"
+              class="btn button-rounded"
+              :class="cta.variant === 'outline' ? 'btn-outline-secondary' : 'btn-scheme'"
+            >
+              <i v-if="cta.icon" :class="cta.icon" class="me-1"></i>
+              {{ cta.label }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import Swiper from 'swiper'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+
+const props = defineProps({
+  id: { type: String, default: 'section-hero-terrace' },
+  scheme: { type: String, default: 'rose-light' },
+  title: { type: String, required: true },
+  subtitle: { type: String, default: '' },
+  body: { type: String, default: '' },
+  icon: { type: String, default: '' },
+  ctas: {
+    type: Array,
+    default: () => ([
+      { label: 'Ver paquetes', href: '#section-packages', variant: 'solid', icon: 'bi bi-bag' },
+      { label: 'Galería', href: '#section-gallery', variant: 'outline', icon: 'bi bi-images' }
+    ])
+  },
+  params: {
+    type: Object,
+    default: () => ({
+      backgrounds: [
+        { image: 'https://placehold.co/1200x1600/jpg?text=Terraza+1', title: 'Vista principal' },
+        { image: 'https://placehold.co/1200x1600/jpg?text=Terraza+2', title: 'Evento de noche' },
+        { image: 'https://placehold.co/1200x1600/jpg?text=Terraza+3', title: 'Montaje elegante' }
+      ]
+    })
+  }
+})
+
+const swiperEl = ref(null)
+
+onMounted(() => {
+  new Swiper(swiperEl.value, {
+    modules: [Autoplay, EffectFade],
+    effect: 'fade',
+    loop: true,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    speed: 1200
+  })
+})
+</script>
+
+<style lang="less" scoped>
+.section-hero-terrace {
+  position: relative;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--text);
+
+  /* Fondo Swiper */
+  .hero-bg-swiper {
+    position: absolute;
+    inset: 0;
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.85) saturate(1.05);
+      transition: opacity 1.2s ease;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        color-mix(in oklab, var(--surface) 50%, transparent) 5%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--heading-color);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 520px;
+  }
+
+  .hero-body {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .hero-ctas {
+    .btn {
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-scheme {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-contrast);
+      transition: all 0.25s ease;
+      &:hover {
+        background-color: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-outline-secondary {
+      border-color: var(--surface-border);
+      color: var(--text);
+      transition: all 0.25s ease;
+      &:hover {
+        background-color: var(--accent-muted);
+        border-color: var(--accent);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .row {
+      text-align: center;
+
+      .hero-title {
+        font-size: clamp(1.6rem, 6vw, 2.4rem);
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
+</style>
+
+
+Y otro ejemplo
+
+<SectionHero8
+  id="section-hero-gallery"
+  scheme="rose-dark"
+  gallery-name="terraza-gallery"
+  :show-dots="false"
+  :show-arrows="true"
+  :autoplay="true"
+  :delay="5000"
+  :gallery="[
+    {
+      image: 'https://placehold.co/600x1200/jpg?text=Salón+Principal',
+      thumb: 'https://placehold.co/600x1400/jpg?text=Salón+Principal',
+      title: 'Salón ',
+      subtitle: 'Capacidad 250 personas'
+    },
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Jardín+Externo',
+      thumb: 'https://placehold.co/600x400/jpg?text=Jardín+Externo',
+      title: 'Jardín Externo',
+      subtitle: 'Ceremonias al aire libre'
+    },
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Área+de+Piscina',
+      thumb: 'https://placehold.co/600x400/jpg?text=Área+de+Piscina',
+      title: 'Área de Piscina',
+      subtitle: 'Ambiente relajante'
+    },
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Vista+Panorámica',
+      thumb: 'https://placehold.co/600x400/jpg?text=Vista+Panorámica',
+      title: 'Vista Panorámica',
+      subtitle: 'Ciudad al atardecer'
+    },
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Decoración+Nocturna',
+      thumb: 'https://placehold.co/600x400/jpg?text=Decoración+Nocturna',
+      title: 'Decoración Nocturna',
+      subtitle: 'Ambiente cálido y elegante'
+    }
+    ,
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Decoración+Nocturna',
+      thumb: 'https://placehold.co/600x400/jpg?text=Decoración+Nocturna',
+      title: 'Decoración Nocturna',
+      subtitle: 'Ambiente cálido y elegante'
+    }
+    ,
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Decoración+Nocturna',
+      thumb: 'https://placehold.co/600x400/jpg?text=Decoración+Nocturna',
+      title: 'Decoración Nocturna',
+      subtitle: 'Ambiente cálido y elegante'
+    }
+    ,
+    {
+      image: 'https://placehold.co/1200x800/jpg?text=Decoración+Nocturna',
+      thumb: 'https://placehold.co/600x400/jpg?text=Decoración+Nocturna',
+      title: 'Decoración Nocturna',
+      subtitle: 'Ambiente cálido y elegante'
+    }
+  ]"
+/>
+
+Lo que haremos ahora, son varias Secciones para mostrar los servicios  esta es una antigua version que tenia, pero la vampos a mejorar
+
+<!-- src/terrazas/SectionServices.vue -->
+<template>
+  <section
+    :id="id"
+    class="section-services position-relative overflow-hidden"
+    :class="schemeClass"
+  >
+    <!-- Fondo opcional -->
+    <div v-if="backgroundImg" class="bg-media"
+      :style="{ backgroundImage: `url('${backgroundImg}')` }"
+      aria-hidden="true"
+    />
+    <div v-if="enableOverlay" class="bg-overlay" aria-hidden="true"></div>
+
+    <div class="container position-relative">
+      <!-- Header -->
+      <header class="text-center mb-4 mb-md-5">
+        <h2 class="display-6 fw-bold" data-aos="fade-up" data-aos-duration="700">
+          {{ title }}
+        </h2>
+        <p v-if="intro" class="text-muted mx-auto" :style="{ maxWidth: '42rem' }"
+           data-aos="fade-up" data-aos-duration="700" data-aos-delay="120">
+          {{ intro }}
+        </p>
+      </header>
+
+      <!-- Servicios destacados -->
+      <div v-if="featuredServices?.length" class="row g-3 g-md-4 align-items-stretch mb-3 mb-md-4">
+        <div v-for="(svc, i) in featuredServices" :key="svc.id || `f-${i}`"
+             class="col-12" :class="featuredColClass"
+             data-aos="fade-up" data-aos-duration="700" :data-aos-delay="100 + (i * 60)">
+          <article class="service-card h-100 rounded-4 shadow-sm">
+            <div class="service-body p-3 p-md-4 d-flex flex-column">
+              <div class="d-flex align-items-start gap-3 mb-2">
+                <div class="service-icon-wrap">
+                  <i :class="resolveIcon(svc)" class="service-icon"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="h6 mb-1 service-title">{{ svc.title }}</h3>
+                  <p v-if="svc.subtitle" class="text-muted small mb-0">{{ svc.subtitle }}</p>
+                </div>
+              </div>
+              <p v-if="svc.text" class="service-text text-muted mb-3">{{ svc.text }}</p>
+
+              <ul v-if="svc.meta?.length" class="service-meta list-unstyled d-flex flex-wrap gap-2 mb-3">
+                <li v-for="(m, mi) in svc.meta" :key="mi" class="meta-item">
+                  <i v-if="m.icon" :class="m.icon" class="me-1"></i>{{ m.text }}
+                </li>
+              </ul>
+
+              <ul v-if="svc.features?.length" class="service-features list-unstyled mb-3">
+                <li v-for="(f, fi) in svc.features" :key="fi" class="d-flex align-items-start">
+                  <i :class="f.icon || 'bi bi-check2-circle'" class="me-2 mt-1"></i>
+                  <span>{{ f.text || f }}</span>
+                </li>
+              </ul>
+
+              <div v-if="svc.ctas?.length" class="mt-auto d-flex flex-wrap gap-2">
+                <a v-for="(cta, ci) in svc.ctas" :key="ci"
+                   :href="cta.href || '#'" class="btn button-rounded"
+                   :class="buttonClass(cta)" @click.prevent="onCta(svc, cta)">
+                  <i v-if="cta.icon" :class="cta.icon" class="me-1"></i>{{ cta.label }}
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Otros servicios (chips) -->
+      <div v-if="otherServices?.length" class="compact-wrap">
+        <h3 v-if="otherTitle" class="h6 fw-bold mb-2"
+            data-aos="fade-up" data-aos-duration="700">{{ otherTitle }}</h3>
+        <p v-if="otherIntro" class="text-muted small mb-2"
+           data-aos="fade-up" data-aos-duration="700" data-aos-delay="80">{{ otherIntro }}</p>
+
+        <div class="row g-2 g-md-2">
+          <div v-for="(svc, i) in otherServices" :key="svc.id || `c-${i}`"
+               class="col-6 col-md-4" :class="compactColClass"
+               data-aos="fade-up" data-aos-duration="700"
+               :data-aos-delay="80 + (i % 8) * 40">
+            <button type="button"
+              class="service-chip w-100 d-flex align-items-center gap-2 rounded-3"
+              @click="openModal(svc)">
+              <span class="chip-icon-wrap">
+                <i :class="resolveIcon(svc)" class="chip-icon"></i>
+              </span>
+              <span class="chip-label text-truncate">{{ svc.title }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p v-if="footnote" class="text-muted small text-center mt-4"
+         data-aos="fade-up" data-aos-duration="700">{{ footnote }}</p>
+    </div>
+
+    <!-- Modal dinámico -->
+    <div class="modal fade" :id="modalId" tabindex="-1" aria-hidden="true" ref="modalEl">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ activeSvc?.title || '' }}</h5>
+            <button type="button" class="btn-close" @click="closeModal"></button>
+          </div>
+          <div class="modal-body">
+            <p v-if="activeSvc?.subtitle" class="text-muted small mb-2">{{ activeSvc.subtitle }}</p>
+            <p v-if="activeSvc?.text" class="mb-3">{{ activeSvc.text }}</p>
+
+            <ul v-if="activeSvc?.meta?.length" class="list-unstyled d-flex flex-wrap gap-2 mb-3">
+              <li v-for="(m, mi) in activeSvc.meta" :key="mi" class="meta-item">
+                <i v-if="m.icon" :class="m.icon" class="me-1"></i>{{ m.text }}
+              </li>
+            </ul>
+
+            <ul v-if="activeSvc?.features?.length" class="list-unstyled mb-0">
+              <li v-for="(f, fi) in activeSvc.features" :key="fi" class="d-flex align-items-start">
+                <i :class="f.icon || 'bi bi-check2-circle'" class="me-2 mt-1"></i>
+                <span>{{ f.text || f }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <a v-for="(cta, ci) in (activeSvc?.ctas || [])"
+               :key="ci" :href="cta.href || '#'"
+               class="btn button-rounded" :class="buttonClass(cta)"
+               @click.prevent="onCta(activeSvc, cta)">
+              <i v-if="cta.icon" :class="cta.icon" class="me-1"></i>{{ cta.label }}
+            </a>
+            <button type="button" class="btn btn-outline-secondary button-rounded"
+                    @click="closeModal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shape-separator" aria-hidden="true"></div>
+  </section>
+</template>
+
+<script setup>
+import { computed, ref, onMounted } from 'vue'
+
+const props = defineProps({
+  id: { type: String, default: 'section-services' },
+  scheme: { type: String, default: 'rose-light' },
+  title: { type: String, default: 'Servicios' },
+  intro: { type: String, default: '' },
+  footnote: { type: String, default: '' },
+  featuredServices: { type: Array, default: () => [] },
+  otherServices: { type: Array, default: () => [] },
+  otherTitle: { type: String, default: 'Otros servicios' },
+  otherIntro: { type: String, default: '' },
+  featuredColumnsMd: { type: Number, default: 2 },
+  featuredColumnsLg: { type: Number, default: 3 },
+  compactColumnsMd:  { type: Number, default: 3 },
+  compactColumnsLg:  { type: Number, default: 4 },
+  backgroundImg: { type: String, default: '' },
+  enableOverlay: { type: Boolean, default: false }
+})
+
+const emit = defineEmits(['cta:click'])
+
+const schemeClass = computed(() => `scheme-${props.scheme}`)
+const featuredColClass = computed(() => props.featuredColumnsMd === 3 ? 'col-md-4' : 'col-md-6')
+const compactColClass = computed(() => `col-md-${12 / props.compactColumnsMd} col-lg-${12 / props.compactColumnsLg}`)
+
+const KEYWORD_ICON_MAP = [
+  { keys: ['asador','parrilla','grill','bbq'], icon: 'bi bi-fire' },
+  { keys: ['estacionamiento','parking','aparcamiento','auto'], icon: 'bi bi-car-front' },
+  { keys: ['baño','banos','baños','toilet','restroom','wc'], icon: 'bi bi-droplet' },
+  { keys: ['wifi','internet'], icon: 'bi bi-wifi' },
+  { keys: ['musica','música','music','audio'], icon: 'bi bi-music-note-beamed' },
+  { keys: ['iluminacion','iluminación','luces','lighting'], icon: 'bi bi-lightbulb' },
+  { keys: ['sombra','toldo','carpa'], icon: 'bi bi-umbrella' },
+  { keys: ['seguridad','security'], icon: 'bi bi-shield-check' },
+  { keys: ['jardin','jardín','garden'], icon: 'bi bi-tree' },
+  { keys: ['cocina','cocineta','kitchen'], icon: 'bi bi-basket' },
+  { keys: ['bar','bebidas','drinks'], icon: 'bi bi-cup-hot' },
+  { keys: ['electricidad','power','energia'], icon: 'bi bi-lightning' },
+  { keys: ['clima','aire','ac'], icon: 'bi bi-thermometer-sun' },
+  { keys: ['vista','mirador','view'], icon: 'bi bi-binoculars' }
+]
+const DEFAULT_ICON = 'bi bi-gear'
+const resolveIcon = (svc) => {
+  if (svc?.icon) return svc.icon
+  const hay = (svc?.title || '') + ' ' + (svc?.subtitle || '') + ' ' + (svc?.text || '')
+  return (KEYWORD_ICON_MAP.find(m => m.keys.some(k => hay.toLowerCase().includes(k)))?.icon) || DEFAULT_ICON
+}
+
+const modalEl = ref(null)
+const modalInstance = ref(null)
+const activeSvc = ref(null)
+const modalId = computed(() => `${props.id}-modal`)
+
+onMounted(() => {
+  if (window.bootstrap?.Modal && modalEl.value) {
+    modalInstance.value = new window.bootstrap.Modal(modalEl.value, { backdrop: true, keyboard: true })
+  }
+})
+
+const openModal = (svc) => {
+  activeSvc.value = svc
+  modalInstance.value?.show()
+}
+const closeModal = () => modalInstance.value?.hide()
+
+const buttonClass = (cta) => {
+  const v = cta?.variant || 'solid'
+  if (v === 'outline') return 'btn-outline-secondary'
+  if (v === 'ghost') return 'btn-link btn-ghost'
+  return 'btn-primary btn-scheme'
+}
+const onCta = (svc, cta) => {
+  emit('cta:click', { service: svc, cta })
+  if (cta?.href?.startsWith('#')) {
+    document.querySelector(cta.href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  } else if (cta?.href) {
+    window.location.href = cta.href
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.section-services {
+  background: var(--surface);
+  color: var(--text);
+  padding: 3rem 0;
+  @media (min-width: 768px) { padding: 4rem 0; }
+
+  .bg-media {
+    position: absolute; inset: 0;
+    background: var(--surface-muted);
+    background-size: cover; background-position: center;
+  }
+  .bg-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, color-mix(in oklab, var(--surface) 70%, transparent), transparent 60%),
+      linear-gradient(to top, color-mix(in oklab, var(--surface) 60%, transparent), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Featured cards */
+  .service-card {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--surface-border, rgba(0,0,0,.08));
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,.12));
+      border-color: color-mix(in oklab, var(--accent), var(--surface-border) 70%);
+    }
+  }
+  .service-body { height: 100%; }
+
+  .service-icon-wrap {
+    flex: 0 0 auto;
+    width: 48px; height: 48px;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: color-mix(in oklab, var(--surface), var(--surface-overlay, rgba(0,0,0,.04)) 30%);
+    border: 1px solid var(--surface-border, rgba(0,0,0,.08));
+  }
+  .service-icon {
+    font-size: 1.25rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .service-title {
+    font-family: var(--font-heading, inherit);
+    margin: 0;
+  }
+  .service-text { margin: .3rem 0 .75rem; }
+
+  .service-meta {
+    .meta-item {
+      background: color-mix(in oklab, var(--surface), var(--surface-overlay, rgba(0,0,0,.04)) 30%);
+      border: 1px solid var(--surface-border, rgba(0,0,0,.08));
+      border-radius: 999px;
+      padding: .25rem .6rem;
+      font-size: .85rem;
+      color: var(--text);
+    }
+  }
+  .service-features {
+    li {
+      margin-bottom: .35rem;
+      i { color: var(--accent); }
+    }
+  }
+
+  /* Compact chips grid */
+  .compact-wrap { margin-top: .25rem; }
+  .service-chip {
+    background: var(--surface-2, var(--surface));
+    color: var(--text);
+    border: 1px solid var(--surface-border, rgba(0,0,0,.08));
+    padding: .55rem .65rem;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    text-align: left;
+    width: 100%;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow, 0 8px 24px rgba(0,0,0,.10));
+      border-color: color-mix(in oklab, var(--accent), var(--surface-border) 70%);
+    }
+  }
+  .chip-icon-wrap {
+    width: 34px; height: 34px;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: color-mix(in oklab, var(--surface), var(--surface-overlay, rgba(0,0,0,.04)) 30%);
+  }
+  .chip-icon { font-size: 1rem; color: var(--accent); line-height: 1; }
+  .chip-label { font-size: .95rem; }
+
+  /* Modal respects scheme */
+  .modal-content {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--surface-border, rgba(0,0,0,.08));
+  }
+  .modal-header { border-bottom: 1px solid var(--surface-border, rgba(0,0,0,.08)); }
+  .modal-footer { border-top: 1px solid var(--surface-border, rgba(0,0,0,.08)); }
+
+  /* Buttons */
+  .btn { border-radius: 999px; padding: .55rem 1rem; }
+  .btn-primary.btn-scheme {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--text-inverse);
+    &:hover {
+      background-color: var(--accent-hover, color-mix(in oklab, var(--accent), black 12%));
+      border-color: var(--accent-hover, color-mix(in oklab, var(--accent), black 12%));
+    }
+    &:active {
+      background-color: var(--accent-active, color-mix(in oklab, var(--accent), black 20%));
+      border-color: var(--accent-active, color-mix(in oklab, var(--accent), black 20%));
+    }
+  }
+  .btn-outline-secondary {
+    color: var(--text);
+    border-color: var(--surface-border, rgba(0,0,0,.12));
+    &:hover {
+      background: var(--accent-muted, color-mix(in oklab, var(--accent), white 80%));
+      border-color: var(--accent);
+    }
+  }
+  .btn-link.btn-ghost {
+    color: var(--muted);
+    text-decoration: none;
+    &:hover { color: var(--text); text-decoration: underline; }
+  }
+
+  .shape-separator {
+    position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 48px;
+    background:
+      radial-gradient(120% 100% at 50% -10%, transparent 45%, var(--surface) 46%),
+      linear-gradient(to bottom, color-mix(in oklab, var(--surface-overlay, rgba(0,0,0,.04)), transparent 50%), var(--surface) 90%);
+    pointer-events: none;
+  }
+}
+</style>

@@ -1,0 +1,48 @@
+
+// =============================
+.section-hero { background-color: @color2; }
+.btn-primary { background-color: @color5; border-color: @color5; }
+}
+
+
+.invite-basic-pastels {
+background-color: #fbfbff;
+.section-hero { background: linear-gradient(180deg, #ffe8f1 0%, #fff 100%); }
+.btn-primary { background-color: #ff69b4; border-color: #ff69b4; }
+}
+
+
+.invite-dark {
+background-color: #0b0b10; color: #e5e7eb;
+.section { color: #e5e7eb; }
+.section-hero { background: #10121a; }
+.btn-primary { background-color: #6366f1; border-color: #4f46e5; }
+}
+
+
+/* Utilidades específicas de invitación */
+.invite-title {
+letter-spacing: .5px;
+}
+.invite-subtitle { color: @color4; }
+
+
+/* Hero */
+.hero-card {
+border-radius: @radius-lg;
+box-shadow: @shadow-sm;
+background: rgba(255,255,255,.8);
+backdrop-filter: blur(6px);
+}
+
+
+/* Imágenes responsivas con proporción opcional */
+.ratio-16x9 { aspect-ratio: 16/9; object-fit: cover; }
+.ratio-1x1 { aspect-ratio: 1/1; object-fit: cover; }
+
+
+/* Enlaces de salto */
+.jump-links {
+display: flex; gap: @sp-3; flex-wrap: wrap;
+.btn { padding-inline: 14px; }
+}
